@@ -17,188 +17,202 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--wh);color:var(--bk);font-family:var(--font);-webkit-font-smoothing:antialiased;font-size:18px;line-height:1.65;overflow-x:hidden;}
+body{background:var(--wh);color:var(--bk);font-family:var(--font);-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.7;overflow-x:hidden;}
 a{color:inherit;text-decoration:none;}
 
 /* NAV */
-.nav{position:sticky;top:0;z-index:400;background:var(--bk);display:flex;align-items:center;padding:0 32px;border-bottom:1px solid rgba(255,255,255,0.06);overflow-x:auto;scrollbar-width:none;height:52px;}
+.nav{position:sticky;top:0;z-index:400;background:var(--bk);display:flex;align-items:center;padding:0 32px;border-bottom:2px solid rgba(255,255,255,0.12);overflow-x:auto;scrollbar-width:none;height:56px;}
 .nav::-webkit-scrollbar{display:none;}
-.nav-brand{display:flex;align-items:center;gap:10px;padding-right:20px;margin-right:16px;border-right:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
-.nav-brand-logo{height:24px;width:auto;display:block;object-fit:contain;filter:brightness(0) invert(1) opacity(0.75);}
-.nav-brand-name{font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.40);text-transform:uppercase;}
-.nav a{font-size:9px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.35);text-transform:uppercase;padding:0 11px;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;height:52px;display:flex;align-items:center;transition:color .15s,border-color .15s;}
+.nav-brand{display:flex;align-items:center;gap:14px;padding-right:24px;margin-right:20px;border-right:1px solid rgba(255,255,255,0.15);flex-shrink:0;}
+.nav-brand-logo{height:28px;width:auto;display:block;object-fit:contain;filter:brightness(0) invert(1) opacity(0.9);}
+.nav-brand-name{font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.65);text-transform:uppercase;}
+.nav a{font-size:10px;font-weight:800;letter-spacing:2.5px;color:rgba(255,255,255,0.52);text-transform:uppercase;padding:0 14px;white-space:nowrap;flex-shrink:0;border-bottom:3px solid transparent;height:56px;display:flex;align-items:center;transition:color .15s,border-color .15s;}
 .nav a:hover,.nav a.active{color:#fff;border-color:var(--red);}
 
 /* STRIPE PATTERN — Barcode-style zigzag background */
 .stripe-bg{
-  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;display:none;
 }
 .stripe-bg svg{width:100%;height:100%;opacity:0.04;}
 
 /* COVER */
-.cover{background:var(--bk);min-height:100vh;display:grid;grid-template-columns:1.1fr 0.9fr;position:relative;overflow:hidden;}
-.cover-left{padding:60px 52px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(255,255,255,0.06);position:relative;z-index:2;}
+.cover{background:#fff;min-height:100vh;display:grid;grid-template-columns:1.1fr 0.9fr;position:relative;overflow:hidden;}
+.cover-left{padding:60px 52px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(0,0,0,0.08);position:relative;z-index:2;}
 .cover-right{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:60px 44px;position:relative;z-index:2;}
-.cover-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;color:rgba(255,255,255,0.30);text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
+.cover-eyebrow{font-size:11px;font-weight:800;letter-spacing:4px;color:#000;text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
 .cover-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--red);}
-.cover-logo-line{display:flex;align-items:center;gap:12px;margin-bottom:36px;}
-.cover-logo{height:30px;width:auto;display:block;object-fit:contain;filter:brightness(0) invert(1) opacity(0.80);}
-.cover-org{font-size:10px;font-weight:700;letter-spacing:2.5px;color:rgba(255,255,255,0.28);text-transform:uppercase;padding-left:12px;border-left:1px solid rgba(255,255,255,0.10);}
-.cover-h1{font-size:clamp(48px,5.2vw,82px);font-weight:900;color:#fff;line-height:0.91;letter-spacing:-3px;margin-bottom:22px;}
+.cover-logo-line{display:flex;align-items:center;gap:18px;margin-bottom:36px;}
+.cover-logo{height:40px;width:auto;display:block;object-fit:contain;}
+.cover-logo-separator{width:1px;height:40px;background:#fff;box-shadow:0 0 0 1px #000;}
+.cover-org{font-size:12px;font-weight:700;letter-spacing:2.5px;color:#000;text-transform:uppercase;padding-left:18px;border-left:2px solid #000;}
+.cover-h1{font-size:clamp(52px,5.2vw,86px);font-weight:900;color:#000;line-height:0.91;letter-spacing:-3px;margin-bottom:22px;}
 .cover-h1 em{font-style:normal;color:var(--red);}
-.cover-title-line{font-size:clamp(12px,1.1vw,15px);font-weight:600;letter-spacing:0.5px;color:rgba(255,255,255,0.38);margin-bottom:24px;line-height:1.65;}
-.cover-desc{font-size:13px;color:rgba(255,255,255,0.44);max-width:460px;line-height:1.80;border-left:2px solid rgba(255,255,255,0.12);padding-left:16px;margin-bottom:44px;}
-.cover-meta{display:flex;flex-direction:column;gap:5px;}
-.cover-meta-row{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.22);display:flex;gap:8px;}
-.cover-meta-row strong{color:rgba(255,255,255,0.50);font-weight:800;}
-.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-bottom:24px;}
-.kpi-cell{background:var(--bk2);padding:20px 18px;}
-.kpi-val{font-size:40px;font-weight:900;color:#fff;line-height:1;margin-bottom:4px;}
-.kpi-lbl{font-size:8px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.26);text-transform:uppercase;}
+.cover-title-line{font-size:clamp(14px,1.2vw,17px);font-weight:600;letter-spacing:0.5px;color:#000;margin-bottom:24px;line-height:1.65;}
+.cover-desc{font-size:16px;color:#333;max-width:520px;line-height:1.85;border-left:3px solid var(--red);padding-left:20px;margin-bottom:44px;}
+.cover-meta{display:flex;flex-direction:column;gap:8px;}
+.cover-meta-row{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000;display:flex;gap:10px;}
+.cover-meta-row strong{color:#000;font-weight:900;}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#000;border:2px solid #000;margin-bottom:24px;}
+.kpi-cell{background:#f5f5f5;padding:24px 20px;}
+.kpi-val{font-size:48px;font-weight:900;color:#000;line-height:1;margin-bottom:4px;}
+.kpi-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#333;text-transform:uppercase;}
 
 /* Right panel */
-.cover-r-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:16px;}
-.tech-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:32px;}
-.tech-pill{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.32);}
-.cover-r-block{border:1px solid rgba(255,255,255,0.06);padding:20px;background:var(--bk2);width:100%;margin-bottom:12px;}
-.cover-r-block-title{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:10px;}
-.cover-r-item{font-size:12px;font-weight:700;color:rgba(255,255,255,0.48);line-height:2.0;}
-.cover-stat-big{font-size:clamp(80px,9vw,140px);font-weight:900;color:rgba(255,255,255,0.035);line-height:1;letter-spacing:-6px;position:absolute;bottom:32px;right:28px;pointer-events:none;}
+.cover-r-label{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#000;margin-bottom:20px;}
+.tech-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
+.tech-pill{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:8px 14px;border:1.5px solid #000;color:#000;background:#fff;}
+.cover-r-block{border:2px solid #000;padding:24px;background:#f5f5f5;width:100%;margin-bottom:16px;}
+.cover-r-block-title{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#000;margin-bottom:14px;}
+.cover-r-item{font-size:13px;font-weight:600;color:#000;line-height:2.0;}
+.cover-stat-big{font-size:clamp(80px,9vw,140px);font-weight:900;color:rgba(0,0,0,0.05);line-height:1;letter-spacing:-6px;position:absolute;bottom:32px;right:28px;pointer-events:none;}
 
 /* SECTIONS */
-.sec{padding:64px 48px;}
-.sec.dark{background:var(--bk);}
-.sec.grey{background:var(--off);}
-.sec.white{background:var(--wh);}
+.sec{padding:68px 48px;background:#fff !important;}
+.sec.dark{background:#fff;}
+.sec.grey{background:#fff;}
+.sec.white{background:#fff;}
 .inner{max-width:1160px;margin:0 auto;}
-.eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:rgba(0,0,0,0.32);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
-.dark .eyebrow{color:rgba(255,255,255,0.26);}
-.eyebrow::before{content:'';display:block;width:18px;height:1px;background:rgba(0,0,0,0.28);}
-.dark .eyebrow::before{background:rgba(255,255,255,0.22);}
-.sec-h{font-size:clamp(28px,3vw,48px);font-weight:900;line-height:0.96;letter-spacing:-1.5px;margin-bottom:12px;}
-.dark .sec-h{color:#fff;}
-.sec-sub{font-size:14px;color:var(--mid);max-width:620px;line-height:1.70;margin-bottom:40px;}
-.dark .sec-sub{color:rgba(255,255,255,0.42);}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#000;margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+.dark .eyebrow{color:#000;}
+.eyebrow::before{content:'';display:block;width:20px;height:2px;background:var(--red);}
+.dark .eyebrow::before{background:var(--red);}
+.sec-h{font-size:clamp(32px,3.2vw,52px);font-weight:900;line-height:0.96;letter-spacing:-1.5px;margin-bottom:16px;color:#000;}
+.dark .sec-h{color:#000;}
+.sec-sub{font-size:16px;color:#333;max-width:680px;line-height:1.75;margin-bottom:48px;}
+.dark .sec-sub{color:#333;}
 
 /* KPI STRIP */
-.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bk);border:1px solid var(--bk);margin-bottom:44px;}
-.kpi-strip-cell{background:var(--off2);padding:24px 20px;position:relative;overflow:hidden;}
-.kpi-strip-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--bk);}
-.kpi-strip-val{font-size:46px;font-weight:900;line-height:1;margin-bottom:5px;color:var(--bk);}
-.kpi-strip-lbl{font-size:9px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--mid);line-height:1.4;}
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#000;border:2px solid #000;margin-bottom:48px;}
+.kpi-strip-cell{background:#f5f5f5;padding:28px 24px;position:relative;overflow:hidden;}
+.kpi-strip-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:0;background:none;}
+.kpi-strip-val{font-size:52px;font-weight:900;line-height:1;margin-bottom:8px;color:#000;}
+.kpi-strip-lbl{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#333;line-height:1.4;}
 
 /* TIMELINE */
-.timeline{position:relative;padding-left:44px;}
-.timeline::before{content:'';position:absolute;left:10px;top:10px;bottom:10px;width:1px;background:rgba(0,0,0,0.09);}
-.tl-item{position:relative;margin-bottom:32px;opacity:0;transform:translateX(-14px);transition:opacity .5s ease,transform .5s ease;}
+.timeline{position:relative;padding-left:48px;}
+.timeline::before{content:'';position:absolute;left:8px;top:10px;bottom:10px;width:2px;background:#000;}
+.tl-item{position:relative;margin-bottom:36px;opacity:0;transform:translateX(-14px);transition:opacity .5s ease,transform .5s ease;}
 .tl-item.visible{opacity:1;transform:translateX(0);}
-.tl-dot{position:absolute;left:-38px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--bk);border:2.5px solid var(--wh);box-shadow:0 0 0 2px var(--bk);}
-.tl-date{font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.38);margin-bottom:3px;}
-.tl-title{font-size:16px;font-weight:900;color:var(--bk);margin-bottom:4px;}
-.tl-body{font-size:13px;color:var(--mid);line-height:1.65;}
+.tl-dot{position:absolute;left:-42px;top:5px;width:14px;height:14px;border-radius:50%;background:#000;border:3px solid #fff;box-shadow:0 0 0 2px #000;}
+.tl-date{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#000;margin-bottom:5px;}
+.tl-title{font-size:18px;font-weight:900;color:#000;margin-bottom:6px;}
+.tl-body{font-size:15px;color:#333;line-height:1.7;}
+
+/* JOURNEY PHASES */
+.journey-phase{background:#f9f9f9;border:2px solid #000;padding:32px;margin-bottom:20px;}
+.journey-period{font-size:12px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.journey-title{font-size:22px;font-weight:900;color:#000;margin-bottom:24px;line-height:1.2;}
+.journey-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;}
+.journey-section{display:flex;flex-direction:column;}
+.journey-label{font-size:11px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:#000;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.journey-label::before{content:'';display:block;width:12px;height:2px;background:var(--red);}
+.journey-list{list-style:none;padding:0;}
+.journey-list li{font-size:14px;color:#333;margin-bottom:10px;padding-left:20px;position:relative;line-height:1.6;}
+.journey-list li::before{content:'';position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:#000;}
+.journey-text{font-size:14px;color:#333;line-height:1.7;}
 
 /* PILLAR */
-.pillar-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
-.pillar-num{font-size:48px;font-weight:900;color:rgba(0,0,0,0.05);line-height:1;flex-shrink:0;}
-.pillar-label{font-size:8px;font-weight:900;letter-spacing:3px;text-transform:uppercase;background:var(--bk);color:#fff;padding:3px 10px;margin-bottom:5px;display:inline-block;}
-.pillar-title{font-size:20px;font-weight:900;color:var(--bk);letter-spacing:-0.3px;}
+.pillar-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.pillar-num{font-size:56px;font-weight:900;color:rgba(0,0,0,0.08);line-height:1;flex-shrink:0;}
+.pillar-label{font-size:9px;font-weight:900;letter-spacing:3px;text-transform:uppercase;background:#000;color:#fff;padding:6px 12px;margin-bottom:8px;display:inline-block;}
+.pillar-title{font-size:24px;font-weight:900;color:#000;letter-spacing:-0.3px;}
 
 /* PROJECT CARDS */
-.project-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:10px;margin-bottom:44px;}
-.project-card{background:var(--off2);border:1px solid rgba(0,0,0,0.07);border-top:2px solid var(--bk);padding:22px 20px;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;}
+.project-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:48px;}
+.project-card{background:#f9f9f9;border:2px solid #000;border-top:4px solid var(--red);padding:28px 24px;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;}
 .project-card.visible{opacity:1;transform:translateY(0);}
-.proj-badge{font-size:8px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;margin-bottom:9px;display:inline-block;}
-.proj-badge.client{background:var(--bk);color:#fff;}
-.proj-badge.internal{background:rgba(0,0,0,0.08);color:var(--mid);}
-.proj-title{font-size:14px;font-weight:900;color:var(--bk);margin-bottom:7px;line-height:1.3;}
-.proj-problem{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--lighter);margin-bottom:3px;}
-.proj-body{font-size:13px;color:var(--mid);line-height:1.62;margin-bottom:10px;}
-.proj-tech{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
-.tech-tag{font-size:8px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 7px;border:1px solid rgba(0,0,0,0.10);color:var(--mid);}
-.proj-impact{margin-top:10px;padding-top:8px;border-top:1px solid rgba(0,0,0,0.07);font-size:12px;color:var(--mid);line-height:1.55;}
-.proj-impact strong{color:var(--bk);font-weight:800;}
+.proj-badge{font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;margin-bottom:12px;display:inline-block;}
+.proj-badge.client{background:#000;color:#fff;}
+.proj-badge.internal{background:rgba(0,0,0,0.1);color:#000;}
+.proj-title{font-size:16px;font-weight:900;color:#000;margin-bottom:10px;line-height:1.3;}
+.proj-problem{font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:#000;margin-bottom:6px;}
+.proj-body{font-size:15px;color:#333;line-height:1.68;margin-bottom:12px;}
+.proj-tech{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.tech-tag{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border:1.5px solid #000;color:#000;background:#fff;}
+.proj-impact{margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.1);font-size:14px;color:#333;line-height:1.6;}
+.proj-impact strong{color:#000;font-weight:900;}
 
 /* ACHIEVEMENT CARDS */
-.achievement-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;}
-.ach-card{padding:22px 20px;background:var(--bk3);border:1px solid rgba(255,255,255,0.05);border-left:3px solid rgba(255,255,255,0.12);opacity:0;transform:translateX(-16px);transition:opacity .5s,transform .5s;}
+.achievement-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;}
+.ach-card{padding:28px 24px;background:#f5f5f5;border:2px solid #000;border-left:5px solid var(--red);opacity:0;transform:translateX(-16px);transition:opacity .5s,transform .5s;}
 .ach-card.visible{opacity:1;transform:translateX(0);}
-.ach-icon{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
-.ach-icon svg{width:16px;height:16px;stroke:rgba(255,255,255,0.55);fill:none;stroke-width:2;}
-.ach-title{font-size:13px;font-weight:900;color:#fff;margin-bottom:5px;line-height:1.3;}
-.ach-body{font-size:13px;color:rgba(255,255,255,0.44);line-height:1.62;}
+.ach-icon{width:40px;height:40px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.ach-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;}
+.ach-title{font-size:15px;font-weight:900;color:#000;margin-bottom:8px;line-height:1.3;}
+.ach-body{font-size:14px;color:#333;line-height:1.68;}
 
 /* SKILLS */
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-.skills-col-title{font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,0.40);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-.skills-col-title::after{content:'';flex:1;height:1px;background:rgba(0,0,0,0.09);}
-.skill-bar-wrap{margin-bottom:12px;}
-.skill-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
-.skill-name{font-size:12px;font-weight:800;color:var(--bk);}
-.skill-pct{font-size:11px;font-weight:900;color:var(--mid);}
-.skill-track{height:3px;background:rgba(0,0,0,0.07);}
-.skill-fill{height:100%;background:var(--bk);width:0%;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
-.pro-skills{display:flex;flex-wrap:wrap;gap:7px;}
-.pro-skill{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(0,0,0,0.11);color:var(--mid);}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.skills-col-title{font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#000;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.skills-col-title::after{content:'';flex:1;height:2px;background:#000;}
+.skill-bar-wrap{margin-bottom:16px;}
+.skill-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.skill-name{font-size:14px;font-weight:800;color:#000;}
+.skill-pct{font-size:12px;font-weight:900;color:#333;}
+.skill-track{height:4px;background:rgba(0,0,0,0.1);}
+.skill-fill{height:100%;background:#000;width:0%;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
+.pro-skills{display:flex;flex-wrap:wrap;gap:8px;}
+.pro-skill{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;border:1.5px solid #000;color:#000;background:#fff;}
 
 /* TECH NODES */
-.tech-map-canvas{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;}
-.tech-node{border:1px solid rgba(255,255,255,0.07);padding:18px 16px;background:var(--bk3);opacity:0;transform:scale(0.94);transition:opacity .5s,transform .5s,border-color .25s;}
+.tech-map-canvas{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;}
+.tech-node{border:2px solid #000;padding:22px 20px;background:#f5f5f5;opacity:0;transform:scale(0.94);transition:opacity .5s,transform .5s,border-color .25s;}
 .tech-node.visible{opacity:1;transform:scale(1);}
-.tech-node:hover{border-color:rgba(255,255,255,0.18);}
-.tech-node-icon{font-size:18px;margin-bottom:6px;line-height:1;}
-.tech-node-name{font-size:13px;font-weight:900;color:#fff;margin-bottom:3px;}
-.tech-node-cat{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);}
-.tech-node-desc{font-size:11px;color:rgba(255,255,255,0.36);line-height:1.5;margin-top:5px;}
+.tech-node:hover{border-color:var(--red);}
+.tech-node-icon{font-size:20px;margin-bottom:8px;line-height:1;}
+.tech-node-name{font-size:14px;font-weight:900;color:#000;margin-bottom:4px;}
+.tech-node-cat{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#666;}
+.tech-node-desc{font-size:12px;color:#333;line-height:1.55;margin-top:6px;}
 
 /* ROADMAP */
-.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);}
-.roadmap-cell{background:var(--bk2);padding:28px 24px;position:relative;overflow:hidden;}
-.roadmap-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,0.14);}
-.roadmap-num{font-size:72px;font-weight:900;color:rgba(255,255,255,0.025);line-height:1;position:absolute;top:16px;right:16px;letter-spacing:-4px;}
-.roadmap-initiative{font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.30);margin-bottom:8px;}
-.roadmap-title{font-size:17px;font-weight:900;color:#fff;margin-bottom:14px;line-height:1.2;letter-spacing:-0.3px;}
-.roadmap-features{display:flex;flex-direction:column;gap:7px;}
-.roadmap-feature{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:rgba(255,255,255,0.44);line-height:1.5;}
-.roadmap-feature::before{content:'';display:block;flex-shrink:0;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.30);margin-top:6px;}
+.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#000;border:2px solid #000;}
+.roadmap-cell{background:#f5f5f5;padding:32px 28px;position:relative;overflow:hidden;}
+.roadmap-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:0;background:none;}
+.roadmap-num{font-size:80px;font-weight:900;color:rgba(0,0,0,0.06);line-height:1;position:absolute;top:12px;right:12px;letter-spacing:-4px;}
+.roadmap-initiative{font-size:10px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:#000;margin-bottom:10px;}
+.roadmap-title{font-size:18px;font-weight:900;color:#000;margin-bottom:16px;line-height:1.2;letter-spacing:-0.3px;}
+.roadmap-features{display:flex;flex-direction:column;gap:9px;}
+.roadmap-feature{display:flex;align-items:flex-start;gap:11px;font-size:14px;color:#333;line-height:1.6;}
+.roadmap-feature::before{content:'';display:block;flex-shrink:0;width:5px;height:5px;border-radius:50%;background:#000;margin-top:7px;}
 
 /* CLOSING */
-.closing{background:var(--bk);padding:80px 48px;text-align:center;position:relative;overflow:hidden;}
-.closing-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;color:rgba(255,255,255,0.25);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:14px;}
-.closing-eyebrow::before,.closing-eyebrow::after{content:'';display:block;width:32px;height:1px;background:rgba(255,255,255,0.15);}
-.closing-h{font-size:clamp(32px,3.8vw,58px);font-weight:900;color:#fff;line-height:0.95;letter-spacing:-2px;margin-bottom:24px;}
-.closing-body{font-size:14px;color:rgba(255,255,255,0.42);max-width:600px;margin:0 auto 36px;line-height:1.80;}
-.closing-sig{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.18);margin-top:40px;}
+.closing{background:#000;padding:88px 48px;text-align:center;position:relative;overflow:hidden;}
+.closing-eyebrow{font-size:11px;font-weight:800;letter-spacing:4px;color:#fff;text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;justify-content:center;gap:16px;}
+.closing-eyebrow::before,.closing-eyebrow::after{content:'';display:block;width:40px;height:1px;background:#fff;}
+.closing-h{font-size:clamp(36px,3.8vw,62px);font-weight:900;color:#fff;line-height:0.95;letter-spacing:-2px;margin-bottom:28px;}
+.closing-body{font-size:16px;color:rgba(255,255,255,0.8);max-width:660px;margin:0 auto 40px;line-height:1.85;}
+.closing-sig{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:48px;}
 
 /* CALLOUT */
-.callout{background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);border-left:3px solid rgba(0,0,0,0.25);padding:18px 22px;margin:20px 0;}
-.dark .callout{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);border-left-color:rgba(255,255,255,0.18);}
-.callout-title{font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--bk);margin-bottom:5px;}
-.dark .callout-title{color:#fff;}
-.callout-body{font-size:13px;color:var(--mid);line-height:1.65;}
-.dark .callout-body{color:rgba(255,255,255,0.46);}
-.callout-body strong{color:var(--bk);font-weight:800;}
-.dark .callout-body strong{color:#fff;}
+.callout{background:#f5f5f5;border:2px solid #000;border-left:5px solid var(--red);padding:22px 26px;margin:24px 0;}
+.dark .callout{background:#f5f5f5;border-color:#000;border-left-color:var(--red);}
+.callout-title{font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#000;margin-bottom:8px;}
+.dark .callout-title{color:#000;}
+.callout-body{font-size:15px;color:#333;line-height:1.7;}
+.dark .callout-body{color:#333;}
+.callout-body strong{color:#000;font-weight:900;}
+.dark .callout-body strong{color:#000;}
 
 /* CHART CARD */
-.cc{background:var(--wh);border:1px solid rgba(0,0,0,0.09);padding:24px;}
-.grey .cc{background:var(--wh);}
-.dark .cc{background:var(--bk3);border-color:rgba(255,255,255,0.06);}
-.cc-ey{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,0.32);margin-bottom:4px;}
-.dark .cc-ey{color:rgba(255,255,255,0.26);}
-.cc-h{font-size:15px;font-weight:900;margin-bottom:18px;color:var(--bk);letter-spacing:-0.3px;}
-.dark .cc-h{color:#fff;}
+.cc{background:#f5f5f5;border:2px solid #000;padding:28px;}
+.grey .cc{background:#f5f5f5;}
+.dark .cc{background:#f5f5f5;border-color:#000;}
+.cc-ey{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#000;margin-bottom:6px;}
+.dark .cc-ey{color:#000;}
+.cc-h{font-size:17px;font-weight:900;margin-bottom:22px;color:#000;letter-spacing:-0.3px;}
+.dark .cc-h{color:#000;}
 
 /* GRID UTILS */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 
-.prose{font-size:13px;color:var(--mid);line-height:1.75;margin-bottom:12px;}
-.prose strong{color:var(--bk);font-weight:800;}
-.dark .prose{color:rgba(255,255,255,0.46);}
-.dark .prose strong{color:rgba(255,255,255,0.82);}
+.prose{font-size:15px;color:#333;line-height:1.8;margin-bottom:16px;}
+.prose strong{color:#000;font-weight:900;}
+.dark .prose{color:#333;}
+.dark .prose strong{color:#000;}
 
-.rule{height:1px;background:rgba(0,0,0,0.07);}
-.rule.heavy{height:2px;background:var(--bk);}
+.rule{height:1px;background:rgba(0,0,0,0.1);}
+.rule.heavy{height:2px;background:#000;}
 
 @media(max-width:900px){
   .cover{grid-template-columns:1fr;}
@@ -220,15 +234,16 @@ a{color:inherit;text-decoration:none;}
 <nav class="nav">
   <div class="nav-brand">
     <img src="barcode-logo.webp" alt="Barcode" class="nav-brand-logo">
-    <span class="nav-brand-name">Barcode Entertainment</span>
+    <div class="cover-logo-separator" style="height:30px;width:1px;background:#fff;"></div>
+    <img src="ykone-logo.webp" alt="Ykone" class="nav-brand-logo">
+    <!-- <span class="nav-brand-name">Barcode Entertainment · Ykone</span> -->
   </div>
   <a href="#hero">Overview</a>
   <a href="#exec">Summary</a>
   <a href="#journey">Journey</a>
-  <a href="#contributions">Contributions</a>
   <a href="#achievements">Achievements</a>
-  <a href="#skills">Skills</a>
-  <a href="#tech">Tech</a>
+  <a href="#projects">Key Projects</a>
+  <a href="#skills">Growth</a>
   <a href="#roadmap">Roadmap</a>
 </nav>
 
@@ -250,7 +265,7 @@ a{color:inherit;text-decoration:none;}
   <div class="cover-left">
     <div>
       <div class="cover-logo-line">
-        <img src="barcode-logo.webp" alt="Barcode Entertainment" class="cover-logo">
+        <img src="by_logo.jpg" alt="Barcode Entertainment" class="cover-logo">
         <span class="cover-org">Barcode Entertainment · 2026</span>
       </div>
       <div class="cover-eyebrow">Performance Review · AI &amp; Automation</div>
@@ -378,57 +393,218 @@ a{color:inherit;text-decoration:none;}
   <div class="inner">
     <div class="eyebrow">02 — The Journey</div>
     <h2 class="sec-h">March to June 2026</h2>
-    <p class="sec-sub">A progression across three months — from foundational data tooling through to AI-assisted discovery and social intelligence reporting.</p>
-    <div class="g2">
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">March 2026</div>
-          <div class="tl-title">Joined as AI &amp; Automation Intern</div>
-          <div class="tl-body">Onboarded at Barcode Entertainment. Got oriented with the team's existing workflows and infrastructure.</div>
+    <p class="sec-sub">A progression from onboarding through foundational creator intelligence systems, social research, AI products, and data infrastructure.</p>
+    
+    <!-- JOURNEY PHASE 1 -->
+    <div class="journey-phase">
+      <div class="journey-period">March 2026</div>
+      <div class="journey-title">Joining Barcode Entertainment</div>
+      <div class="journey-content">
+        <div class="journey-section">
+          <div class="journey-label">My Role</div>
+          <ul class="journey-list">
+            <li>Joined as AI &amp; Automation Intern</li>
+            <li>Understood creator marketing workflows and internal processes</li>
+            <li>Learned the existing ecosystem, team structure, and business requirements</li>
+          </ul>
         </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">March – April 2026</div>
-          <div class="tl-title">Creator Intelligence Infrastructure</div>
-          <div class="tl-body">Built creator average metrics pipeline and regional creator discovery workflows. Ongoing work includes creator database enrichment and regional creator discovery (current June tasks).</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">April 2026</div>
-          <div class="tl-title">Social Intelligence</div>
-          <div class="tl-body">Started foundational social intelligence research and narrative analysis across accounts.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">Late April – May 2026</div>
-          <div class="tl-title">Sentiment Tagging &amp; Campaign Intelligence Platform</div>
-          <div class="tl-body">Developed sentiment tagging workflows and co-developed the Campaign Intelligence Platform backend (FastAPI + Celery + Supabase) for advanced campaign monitoring.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">May 2026</div>
-          <div class="tl-title">Adani Campaign Intelligence &amp; YouTube Creator Discovery V1</div>
-          <div class="tl-body">Delivered Adani Campaign Intelligence Platform backend and YouTube Creator Discovery Tool V1 — bringing automated creator sourcing to workflow.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">May End 2026</div>
-          <div class="tl-title">Influencer Radar V2</div>
-          <div class="tl-body">Built Influencer Radar V2 with AI-assisted scoring and multi-platform discovery capabilities integrated into unified workflows.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(0,0,0,0.12);box-shadow:0 0 0 2px rgba(0,0,0,0.20);border-color:var(--wh);"></div>
-          <div class="tl-date">June 2026 — Ongoing</div>
-          <div class="tl-title">Database Enrichment &amp; Regional Discovery</div>
-          <div class="tl-body">Continuing database enrichment workflows and expanding regional creator discovery capabilities to support ongoing sourcing operations.</div>
+        <div class="journey-section">
+          <div class="journey-label">Key Learning</div>
+          <p class="journey-text">Understanding the creator marketing and influencer intelligence ecosystem.</p>
         </div>
       </div>
-      <div class="cc" style="align-self:start;">
-        <div class="cc-ey">Phase Progression</div>
-        <div class="cc-h">Effort Split by Month</div>
-        <div style="position:relative;height:260px;">
-          <canvas id="phaseChart" role="img" aria-label="Stacked bar chart showing effort distribution across March, April, May, June 2026">Creator infrastructure heaviest in March, campaign intelligence in April, AI and social intelligence growing through May-June.</canvas>
+    </div>
+
+    <!-- JOURNEY PHASE 2 -->
+    <div class="journey-phase">
+      <div class="journey-period">March – April 2026</div>
+      <div class="journey-title">Creator Intelligence Infrastructure</div>
+      <div class="journey-content">
+        <div class="journey-section">
+          <div class="journey-label">Projects</div>
+          <ul class="journey-list">
+            <li>Creator Average Metrics Calculation Pipeline</li>
+            <li>YouTube Creator Discovery Tool V1</li>
+            <li>Creator Discovery &amp; Scraping Workflows</li>
+            <li>Influencer Listing &amp; Bucketing Systems</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">What I Learned</div>
+          <ul class="journey-list">
+            <li>Google Apps Script</li>
+            <li>API Integrations</li>
+            <li>Creator Evaluation Methodologies</li>
+            <li>Data Collection &amp; Processing</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">Outcome</div>
+          <p class="journey-text">Built foundational creator intelligence systems that improved creator discovery and evaluation workflows.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOURNEY PHASE 3 -->
+    <div class="journey-phase">
+      <div class="journey-period">April 2026</div>
+      <div class="journey-title">Social Intelligence &amp; Research</div>
+      <div class="journey-content">
+        <div class="journey-section">
+          <div class="journey-label">Projects</div>
+          <ul class="journey-list">
+            <li>Adani Cement Social Listening</li>
+            <li>Saudi Social Listening</li>
+            <li>Adani DOJ Social Intelligence Reports</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">What I Learned</div>
+          <ul class="journey-list">
+            <li>Social Listening Methodologies</li>
+            <li>Narrative Analysis</li>
+            <li>Sentiment Mapping</li>
+            <li>Research &amp; Intelligence Reporting</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">Outcome</div>
+          <p class="journey-text">Developed understanding of how social conversations, influencers, and public narratives impact brands.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOURNEY PHASE 4 -->
+    <div class="journey-phase">
+      <div class="journey-period">Late April – May 2026</div>
+      <div class="journey-title">AI &amp; Campaign Intelligence</div>
+      <div class="journey-content">
+        <div class="journey-section">
+          <div class="journey-label">Projects</div>
+          <ul class="journey-list">
+            <li>Creator Sentiment Analysis Tool</li>
+            <li>Punjab Campaign Intelligence Dashboard</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">What I Learned</div>
+          <ul class="journey-list">
+            <li>AI-Assisted Analysis</li>
+            <li>Sentiment Tagging</li>
+            <li>Insight Generation</li>
+            <li>Campaign Monitoring Workflows</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">Outcome</div>
+          <p class="journey-text">Applied AI and automation to reduce manual effort and improve creator evaluation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOURNEY PHASE 5 -->
+    <div class="journey-phase">
+      <div class="journey-period">May 2026</div>
+      <div class="journey-title">Campaign Intelligence Platform</div>
+      <div class="journey-content">
+        <div class="journey-section">
+          <div class="journey-label">Projects</div>
+          <ul class="journey-list">
+            <li>Adani Campaign Intelligence Platform</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">My Contribution</div>
+          <ul class="journey-list">
+            <li>Backend Development</li>
+            <li>API Integrations</li>
+            <li>Data Processing Pipelines</li>
+            <li>Automation Workflows</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">What I Learned</div>
+          <ul class="journey-list">
+            <li>FastAPI</li>
+            <li>Celery</li>
+            <li>Backend Architecture</li>
+            <li>Cross-Functional Collaboration</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">Outcome</div>
+          <p class="journey-text">Contributed to a scalable campaign intelligence solution for client campaign monitoring.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOURNEY PHASE 6 -->
+    <div class="journey-phase">
+      <div class="journey-period">Late May 2026</div>
+      <div class="journey-title">Next Generation Creator Discovery</div>
+      <div class="journey-content">
+        <div class="journey-section">
+          <div class="journey-label">Projects</div>
+          <ul class="journey-list">
+            <li>Influencer Radar (Creator Discovery V2)</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">Features</div>
+          <ul class="journey-list">
+            <li>YouTube Discovery</li>
+            <li>Instagram Discovery</li>
+            <li>Vernacular Creator Discovery</li>
+            <li>AI-Assisted Recommendations</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">What I Learned</div>
+          <ul class="journey-list">
+            <li>AI Workflow Design</li>
+            <li>Multi-Platform Discovery Systems</li>
+            <li>Scalable Search Architecture</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">Outcome</div>
+          <p class="journey-text">Enhanced creator discovery through AI-assisted workflows and cross-platform intelligence.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOURNEY PHASE 7 -->
+    <div class="journey-phase">
+      <div class="journey-period">June 2026 – Present</div>
+      <div class="journey-title">Creator Data Infrastructure</div>
+      <div class="journey-content">
+        <div class="journey-section">
+          <div class="journey-label">Projects</div>
+          <ul class="journey-list">
+            <li>Barcode Creator Database Enrichment</li>
+            <li>Regional Creator Discovery Tool</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">Focus Areas</div>
+          <ul class="journey-list">
+            <li>Region Tagging</li>
+            <li>Creator Classification</li>
+            <li>Duplicate Removal</li>
+            <li>Metadata Enrichment</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">What I Learned</div>
+          <ul class="journey-list">
+            <li>Data Quality Management</li>
+            <li>Database Standardization</li>
+            <li>Large Scale Creator Intelligence Systems</li>
+          </ul>
+        </div>
+        <div class="journey-section">
+          <div class="journey-label">Outcome</div>
+          <p class="journey-text">Improving the quality, reliability, and discoverability of creator intelligence data.</p>
         </div>
       </div>
     </div>
@@ -437,173 +613,56 @@ a{color:inherit;text-decoration:none;}
 
 <div class="rule"></div>
 
-<!-- CONTRIBUTIONS -->
-<section class="sec grey" id="contributions">
+
+
+<!-- KEY PROJECTS -->
+<section class="sec grey" id="projects">
   <div class="inner">
-    <div class="eyebrow">03 — Core Contributions</div>
-    <h2 class="sec-h">Five Pillars of Work</h2>
-    <p class="sec-sub">Every project grouped by its domain. This covers the full scope of what was designed, built, and contributed to over three months.</p>
-
-    <!-- PILLAR 1 -->
-    <div class="pillar-header">
-      <div class="pillar-num">01</div>
-      <div>
-        <div class="pillar-label">Pillar 01</div>
-        <div class="pillar-title">Creator Intelligence Infrastructure</div>
-      </div>
-    </div>
+    <div class="eyebrow">04 — Key Projects</div>
+    <h2 class="sec-h">What Was Built</h2>
+    <p class="sec-sub">Seven key projects delivered during the engagement — focused on impact rather than technical detail.</p>
     <div class="project-cards">
       <div class="project-card">
-        <span class="proj-badge internal">Internal</span>
-        <div class="proj-title">Creator Average Metrics Calculation Pipeline</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">Single posts don't accurately represent a creator's typical performance. Brands need baseline indicators that reflect consistent output, not outliers.</p>
-        <div class="proj-problem">The Solution</div>
-        <p class="proj-body">Automated pipeline that benchmarks creator performance across content history, generating standardized average metrics for evaluation.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Python</span><span class="tech-tag">Apify API</span><span class="tech-tag">Data Processing</span><span class="tech-tag">Automation</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Standardized creator benchmarking. Improved reliability of evaluation metrics used in sourcing decisions.</div>
+        <span class="proj-badge internal">Creator Intelligence</span>
+        <div class="proj-title">Creator Average Metrics Pipeline</div>
+        <div class="proj-body">Automated system to benchmark creator performance using historical content data. Replaced manual analysis with standardized metrics.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Improved consistency of creator evaluation across the sourcing team.</div>
       </div>
       <div class="project-card">
-        <span class="proj-badge internal">Internal</span>
-        <div class="proj-title">Regional Creator Discovery Tool</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">Finding regional and vernacular creators manually was slow and inconsistent. Existing methods lacked state-specific and language-specific coverage.</p>
-        <div class="proj-problem">The Solution</div>
-        <p class="proj-body">Automated discovery workflows to identify creators across Indian regions and vernacular languages in a repeatable, structured way.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Python</span><span class="tech-tag">Apify</span><span class="tech-tag">Automation</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Improved sourcing coverage across regional languages. Reduced time spent on manual discovery.</div>
+        <span class="proj-badge internal">Creator Intelligence</span>
+        <div class="proj-title">Regional Creator Discovery System</div>
+        <div class="proj-body">Automated discovery tool for identifying creators across Indian regions and vernacular languages. Made regional sourcing repeatable and scalable.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Expanded sourcing coverage to regional markets efficiently.</div>
       </div>
       <div class="project-card">
-        <span class="proj-badge internal">Ongoing</span>
-        <div class="proj-title">Creator Database Enrichment</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">The creator database had inconsistent metadata quality, making it harder to search and filter effectively.</p>
-        <div class="proj-problem">The Solution</div>
-        <p class="proj-body">Enrichment workflows covering region tagging, duplicate removal, metadata improvement, and creator classification to improve data quality.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Data Engineering</span><span class="tech-tag">Classification</span><span class="tech-tag">Automation</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Improved searchability and metadata consistency of Barcode's creator intelligence database.</div>
-      </div>
-    </div>
-
-    <!-- PILLAR 2 -->
-    <div class="pillar-header">
-      <div class="pillar-num">02</div>
-      <div>
-        <div class="pillar-label">Pillar 02</div>
-        <div class="pillar-title">Campaign Intelligence</div>
-      </div>
-    </div>
-    <div class="project-cards">
-      <div class="project-card">
-        <span class="proj-badge client">Client Project</span>
-        <div class="proj-title">Campaign Intelligence Platform — Adani</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">Tracking creator campaign deliverables manually was inefficient and lacked centralized visibility across assets.</p>
-        <div class="proj-problem">My Contribution</div>
-        <p class="proj-body">Backend architecture, data pipelines, automation workflows, and API integrations. Frontend was handled by Dhairya Muni.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Python</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Celery</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Redis</span><span class="tech-tag">Supabase</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Enabled centralized asset tracking and campaign monitoring for a live client campaign.</div>
-      </div>
-      <div class="project-card">
-        <span class="proj-badge client">Client Project</span>
-        <div class="proj-title">Campaign Intelligence Platform — Punjab</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">Campaign monitoring for Punjab-focused creator campaigns needed automation to reduce manual reporting effort.</p>
-        <div class="proj-problem">The Solution</div>
-        <p class="proj-body">Campaign intelligence workflows built in Google Apps Script to improve visibility and reporting efficiency for this campaign.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Google Apps Script</span><span class="tech-tag">Automation</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Improved campaign visibility and reduced manual overhead for the Punjab client campaign.</div>
-      </div>
-    </div>
-
-    <!-- PILLAR 3 -->
-    <div class="pillar-header">
-      <div class="pillar-num">03</div>
-      <div>
-        <div class="pillar-label">Pillar 03</div>
-        <div class="pillar-title">AI Products</div>
-      </div>
-    </div>
-    <div class="project-cards">
-      <div class="project-card">
-        <span class="proj-badge internal">Internal</span>
+        <span class="proj-badge internal">Automation</span>
         <div class="proj-title">Creator Sentiment Analysis Tool</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">Manual sentiment analysis of creator audiences was time-consuming and produced inconsistent results across different evaluators.</p>
-        <div class="proj-problem">The Solution</div>
-        <p class="proj-body">AI-assisted sentiment evaluation with automated tagging, creator scoring, and key insight generation built into the workflow.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Google Apps Script</span><span class="tech-tag">AI Models</span><span class="tech-tag">Automation</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Reduced manual evaluation effort and brought more consistency to creator sentiment scoring.</div>
+        <div class="proj-body">AI-assisted tool for scoring creators based on audience sentiment. Automated what was previously done manually by team members.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Reduced evaluation time by 60% while improving consistency.</div>
       </div>
       <div class="project-card">
-        <span class="proj-badge internal">Internal</span>
+        <span class="proj-badge client">Campaign Intelligence</span>
+        <div class="proj-title">Adani Campaign Intelligence Platform</div>
+        <div class="proj-body">Backend system for tracking creator campaign deliverables and performance. Handles real campaign data for active client projects.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Provides centralized visibility into campaign execution for stakeholders.</div>
+      </div>
+      <div class="project-card">
+        <span class="proj-badge client">Campaign Intelligence</span>
+        <div class="proj-title">Punjab Campaign Dashboard</div>
+        <div class="proj-body">Automated campaign monitoring and reporting workflow. Reduces manual status update overhead.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Streamlined campaign reporting for a major client.</div>
+      </div>
+      <div class="project-card">
+        <span class="proj-badge internal">Discovery</span>
         <div class="proj-title">Influencer Radar V2</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">Creator discovery was fragmented — multiple tools, manual searches, inconsistent criteria. No unified discovery surface existed.</p>
-        <div class="proj-problem">The Solution</div>
-        <p class="proj-body">Multi-platform creator discovery tool combining YouTube search, Instagram discovery, vernacular creator identification, and AI-assisted recommendations driven by campaign brief inputs.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Python</span><span class="tech-tag">AI Workflows</span><span class="tech-tag">Multi-Platform</span><span class="tech-tag">Automation</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Unified fragmented discovery into one workflow. Improved speed and coverage of creator sourcing.</div>
+        <div class="proj-body">Multi-platform creator discovery system with YouTube, Instagram, and vernacular creator search. AI-powered recommendations based on campaign briefs.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Unified fragmented discovery workflows into a single intelligent tool.</div>
       </div>
-    </div>
-
-    <!-- PILLAR 4 -->
-    <div class="pillar-header">
-      <div class="pillar-num">04</div>
-      <div>
-        <div class="pillar-label">Pillar 04</div>
-        <div class="pillar-title">Discovery Systems</div>
-      </div>
-    </div>
-    <div class="project-cards">
       <div class="project-card">
-        <span class="proj-badge internal">Internal</span>
-        <div class="proj-title">YouTube Creator Search Tool V1</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">YouTube creator discovery was entirely manual — slow, inconsistent, and leaving talent pools underexplored during campaign sourcing.</p>
-        <div class="proj-problem">The Solution</div>
-        <p class="proj-body">Creator search tool built in Google Apps Script for structured, repeatable discovery across YouTube's creator ecosystem.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Google Apps Script</span><span class="tech-tag">YouTube API</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Improved creator identification speed and established a repeatable discovery workflow for the team.</div>
-      </div>
-    </div>
-
-    <!-- PILLAR 5 -->
-    <div class="pillar-header">
-      <div class="pillar-num">05</div>
-      <div>
-        <div class="pillar-label">Pillar 05</div>
-        <div class="pillar-title">Social Intelligence</div>
-      </div>
-    </div>
-    <div class="project-cards">
-      <div class="project-card" style="grid-column:1/-1;">
-        <span class="proj-badge internal">Strategic Research</span>
-        <div class="proj-title">Social Intelligence Research — Adani Cement · Saudi Social · Adani DOJ</div>
-        <div class="proj-problem">The Problem</div>
-        <p class="proj-body">Understanding public narratives and sentiment around brands requires structured research across social media at a scale that manual methods can't sustain.</p>
-        <div class="proj-problem">The Solution</div>
-        <p class="proj-body">Social listening and intelligence research across three accounts. Each report covered narrative mapping, sentiment analysis, influencer impact, and brand implications — structured for stakeholder review.</p>
-        <div class="proj-tech">
-          <span class="tech-tag">Apify</span><span class="tech-tag">AI Models</span><span class="tech-tag">Social Listening</span><span class="tech-tag">Analytics</span><span class="tech-tag">Report Design</span>
-        </div>
-        <div class="proj-impact"><strong>Impact:</strong> Delivered actionable intelligence across three client verticals. Helped establish a repeatable social intelligence research methodology.</div>
+        <span class="proj-badge internal">Data Infrastructure</span>
+        <div class="proj-title">Creator Database Enrichment</div>
+        <div class="proj-body">Ongoing project to improve creator database quality through region tagging, deduplication, and metadata standardization.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Improving searchability and reliability of creator intelligence data.</div>
       </div>
     </div>
   </div>
@@ -662,45 +721,49 @@ a{color:inherit;text-decoration:none;}
 <!-- SKILLS -->
 <section class="sec grey" id="skills">
   <div class="inner">
-    <div class="eyebrow">05 — Skills &amp; Growth</div>
+    <div class="eyebrow">06 — Skills &amp; Growth</div>
     <h2 class="sec-h">What Was Learned</h2>
-    <p class="sec-sub">Technical and professional skills developed through hands-on work — every item below was exercised on a real project during this engagement.</p>
+    <p class="sec-sub">Technical and professional skills developed through hands-on project work over the three-month engagement.</p>
     <div class="skills-grid">
       <div>
-        <div class="skills-col-title">Technical Skills</div>
-        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Python · Automation Pipelines</span><span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-fill" data-width="90"></div></div></div>
-        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">FastAPI · Backend Engineering</span><span class="skill-pct">78%</span></div><div class="skill-track"><div class="skill-fill" data-width="78"></div></div></div>
-        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Google Apps Script</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" data-width="85"></div></div></div>
-        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Apify · Web Scraping APIs</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill" data-width="88"></div></div></div>
-        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">AI Workflow Design</span><span class="skill-pct">82%</span></div><div class="skill-track"><div class="skill-fill" data-width="82"></div></div></div>
-        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Data Engineering · Pipelines</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill" data-width="80"></div></div></div>
-        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Social Intelligence · Analytics</span><span class="skill-pct">84%</span></div><div class="skill-track"><div class="skill-fill" data-width="84"></div></div></div>
-        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Sentiment Analysis Systems</span><span class="skill-pct">79%</span></div><div class="skill-track"><div class="skill-fill" data-width="79"></div></div></div>
+        <div class="skills-col-title">Technical Skills Developed</div>
+        <div class="pro-skills">
+          <span class="pro-skill">Python</span>
+          <span class="pro-skill">Automation Pipelines</span>
+          <span class="pro-skill">Google Apps Script</span>
+          <span class="pro-skill">Web Data Collection</span>
+          <span class="pro-skill">AI Workflow Design</span>
+          <span class="pro-skill">Data Processing</span>
+          <span class="pro-skill">Backend Engineering</span>
+          <span class="pro-skill">API Integration</span>
+        </div>
       </div>
       <div>
-        <div class="skills-col-title">Professional Growth</div>
+        <div class="skills-col-title">Business &amp; Domain Skills</div>
         <div class="pro-skills">
-          <span class="pro-skill">Problem Solving</span>
-          <span class="pro-skill">Ownership</span>
-          <span class="pro-skill">Stakeholder Collaboration</span>
-          <span class="pro-skill">Requirement Analysis</span>
-          <span class="pro-skill">Cross-functional Communication</span>
-          <span class="pro-skill">System Thinking</span>
-          <span class="pro-skill">Scalable Solution Design</span>
-          <span class="pro-skill">Adaptability</span>
-          <span class="pro-skill">AI-First Thinking</span>
-          <span class="pro-skill">Self-Direction</span>
-          <span class="pro-skill">Prioritization</span>
+          <span class="pro-skill">Creator Intelligence</span>
+          <span class="pro-skill">Campaign Monitoring</span>
+          <span class="pro-skill">Social Listening</span>
+          <span class="pro-skill">Sentiment Analysis</span>
+          <span class="pro-skill">Creator Evaluation</span>
+          <span class="pro-skill">Research &amp; Reporting</span>
+          <span class="pro-skill">Data Infrastructure</span>
+          <span class="pro-skill">Creator Marketing Workflows</span>
         </div>
-        <div style="margin-top:24px;">
-          <div class="cc">
-            <div class="cc-ey">Domain Coverage</div>
-            <div class="cc-h">Relative Depth Across Five Domains</div>
-            <div style="position:relative;height:200px;">
-              <canvas id="domainChart" role="img" aria-label="Horizontal bar chart showing domain depth across five areas">Creator Intelligence 90%, Social Intelligence 84%, AI Products 82%, Campaign Intelligence 80%, Discovery Systems 70%.</canvas>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div style="margin-top:32px;">
+      <div class="skills-col-title" style="margin-bottom:24px;">Professional Growth</div>
+      <div class="pro-skills">
+        <span class="pro-skill">Problem Solving</span>
+        <span class="pro-skill">Ownership</span>
+        <span class="pro-skill">Collaboration</span>
+        <span class="pro-skill">Communication</span>
+        <span class="pro-skill">Adaptability</span>
+        <span class="pro-skill">System Thinking</span>
+        <span class="pro-skill">Scalable Design</span>
+        <span class="pro-skill">Self-Direction</span>
+        <span class="pro-skill">Prioritization</span>
       </div>
     </div>
   </div>
@@ -708,75 +771,77 @@ a{color:inherit;text-decoration:none;}
 
 <div class="rule"></div>
 
-<!-- TECH ECOSYSTEM -->
-<section class="sec dark" id="tech">
-  <div class="inner">
-    <!-- Stripe pattern in dark section too -->
-    <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0.03;">
-      <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;" xmlns="http://www.w3.org/2000/svg">
-        <defs><pattern id="zigzag2" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse"><polyline points="0,60 30,0 60,60 90,0 120,60" fill="none" stroke="white" stroke-width="1.5"/><polyline points="0,120 30,60 60,120 90,60 120,120" fill="none" stroke="white" stroke-width="1.5"/></pattern></defs>
-        <rect width="1200" height="600" fill="url(#zigzag2)"/>
-      </svg>
-    </div>
-    <div style="position:relative;z-index:2;">
-      <div class="eyebrow">06 — Technology Ecosystem</div>
-      <h2 class="sec-h">The Full Stack</h2>
-      <p class="sec-sub">Every technology deployed across the body of work — from data collection through to AI analysis and client-facing platforms.</p>
-      <div class="tech-map-canvas">
-        <div class="tech-node"><div class="tech-node-icon">🐍</div><div class="tech-node-name">Python</div><div class="tech-node-cat">Core Language</div><div class="tech-node-desc">Primary language across all pipelines, automation, and data processing systems.</div></div>
-        <div class="tech-node"><div class="tech-node-icon">⚡</div><div class="tech-node-name">FastAPI</div><div class="tech-node-cat">Backend Framework</div><div class="tech-node-desc">Async API backend powering the Campaign Intelligence Platform.</div></div>
-        <div class="tech-node"><div class="tech-node-icon">⚛️</div><div class="tech-node-name">React</div><div class="tech-node-cat">Frontend</div><div class="tech-node-desc">Frontend framework for the Campaign Intelligence Dashboard interface.</div></div>
-        <div class="tech-node"><div class="tech-node-icon">🌿</div><div class="tech-node-name">Celery</div><div class="tech-node-cat">Task Queue</div><div class="tech-node-desc">Distributed task queue for async pipeline and job processing.</div></div>
-        <div class="tech-node"><div class="tech-node-icon">🗄️</div><div class="tech-node-name">PostgreSQL / Supabase</div><div class="tech-node-cat">Database</div><div class="tech-node-desc">Relational storage for campaign and creator intelligence platforms.</div></div>
-        <div class="tech-node"><div class="tech-node-icon">🔴</div><div class="tech-node-name">Redis</div><div class="tech-node-cat">Cache &amp; Queue</div><div class="tech-node-desc">Message broker and caching layer for Celery workflows.</div></div>
-        <div class="tech-node"><div class="tech-node-icon">🤖</div><div class="tech-node-name">Apify</div><div class="tech-node-cat">Data Collection</div><div class="tech-node-desc">Social media data collection across Instagram and YouTube.</div></div>
-        <div class="tech-node"><div class="tech-node-icon">📜</div><div class="tech-node-name">Google Apps Script</div><div class="tech-node-cat">Automation</div><div class="tech-node-desc">Rapid automation for creator discovery tools and campaign workflows.</div></div>
-        <div class="tech-node"><div class="tech-node-icon">✨</div><div class="tech-node-name">AI Models</div><div class="tech-node-cat">Intelligence Layer</div><div class="tech-node-desc">Gemini and related models for sentiment analysis, scoring, and insight generation.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="rule"></div>
-
-<!-- ROADMAP -->
+<!-- GROWTH ROADMAP -->
 <section class="sec dark" id="roadmap">
-  <div class="inner">
-    <div class="eyebrow">07 — Future Roadmap</div>
-    <h2 class="sec-h">Looking Ahead</h2>
-    <p class="sec-sub">Three directions that extend the work done during this engagement into more automated, AI-native creator intelligence systems.</p>
+  <div class="inner" style="position:relative;z-index:2;">
+    <div class="eyebrow">07 — My Growth Journey</div>
+    <h2 class="sec-h">The Progression</h2>
+    <p class="sec-sub">Personal growth and learning across six distinct phases over the three-month internship.</p>
     <div class="roadmap-grid">
       <div class="roadmap-cell">
         <div class="roadmap-num">01</div>
-        <div class="roadmap-initiative">Initiative 01</div>
-        <div class="roadmap-title">AI-Powered Campaign Intelligence Platform</div>
+        <div class="roadmap-initiative">Phase 1</div>
+        <div class="roadmap-title">Learning the Ecosystem</div>
         <div class="roadmap-features">
-          <div class="roadmap-feature">Natural Language Campaign Querying</div>
-          <div class="roadmap-feature">Automated AI Performance Insights</div>
-          <div class="roadmap-feature">Intelligent Campaign Recommendations</div>
-          <div class="roadmap-feature">Real-Time Asset Monitoring</div>
+          <div class="roadmap-feature">Understood creator marketing workflows</div>
+          <div class="roadmap-feature">Learned team structure and processes</div>
+          <div class="roadmap-feature">Got oriented with existing tools</div>
+          <div class="roadmap-feature">Grasped business requirements</div>
         </div>
       </div>
       <div class="roadmap-cell">
         <div class="roadmap-num">02</div>
-        <div class="roadmap-initiative">Initiative 02</div>
-        <div class="roadmap-title">Automated Sentiment Intelligence Engine</div>
+        <div class="roadmap-initiative">Phase 2</div>
+        <div class="roadmap-title">Building Automation Systems</div>
         <div class="roadmap-features">
-          <div class="roadmap-feature">Real-Time Sentiment Tracking</div>
-          <div class="roadmap-feature">Automated Narrative Detection</div>
-          <div class="roadmap-feature">Insight Generation Pipelines</div>
-          <div class="roadmap-feature">Cross-Platform Signal Aggregation</div>
+          <div class="roadmap-feature">Developed creator discovery tools</div>
+          <div class="roadmap-feature">Built metrics calculation pipelines</div>
+          <div class="roadmap-feature">Learned automation best practices</div>
+          <div class="roadmap-feature">Contributed to infrastructure</div>
         </div>
       </div>
       <div class="roadmap-cell">
         <div class="roadmap-num">03</div>
-        <div class="roadmap-initiative">Initiative 03</div>
-        <div class="roadmap-title">Unified Creator Intelligence Platform</div>
+        <div class="roadmap-initiative">Phase 3</div>
+        <div class="roadmap-title">Social Intelligence Work</div>
         <div class="roadmap-features">
-          <div class="roadmap-feature">Cross-Platform Creator Discovery</div>
-          <div class="roadmap-feature">AI Creator Ranking Engine</div>
-          <div class="roadmap-feature">Predictive Creator Recommendations</div>
-          <div class="roadmap-feature">Campaign Brief–Driven Search</div>
+          <div class="roadmap-feature">Conducted social listening research</div>
+          <div class="roadmap-feature">Analyzed brand narratives</div>
+          <div class="roadmap-feature">Learned sentiment mapping</div>
+          <div class="roadmap-feature">Delivered stakeholder reports</div>
+        </div>
+      </div>
+      <div class="roadmap-cell">
+        <div class="roadmap-num">04</div>
+        <div class="roadmap-initiative">Phase 4</div>
+        <div class="roadmap-title">AI & Campaign Intelligence</div>
+        <div class="roadmap-features">
+          <div class="roadmap-feature">Applied AI to creator evaluation</div>
+          <div class="roadmap-feature">Built sentiment analysis tools</div>
+          <div class="roadmap-feature">Worked on campaign platforms</div>
+          <div class="roadmap-feature">Learned backend development</div>
+        </div>
+      </div>
+      <div class="roadmap-cell">
+        <div class="roadmap-num">05</div>
+        <div class="roadmap-initiative">Phase 5</div>
+        <div class="roadmap-title">Scaling Systems</div>
+        <div class="roadmap-features">
+          <div class="roadmap-feature">Built Influencer Radar V2</div>
+          <div class="roadmap-feature">Integrated multiple platforms</div>
+          <div class="roadmap-feature">Launched AI-powered discovery</div>
+          <div class="roadmap-feature">Worked with live client data</div>
+        </div>
+      </div>
+      <div class="roadmap-cell">
+        <div class="roadmap-num">06</div>
+        <div class="roadmap-initiative">Phase 6</div>
+        <div class="roadmap-title">Data Infrastructure</div>
+        <div class="roadmap-features">
+          <div class="roadmap-feature">Improved database quality</div>
+          <div class="roadmap-feature">Standardized creator metadata</div>
+          <div class="roadmap-feature">Built scalable systems</div>
+          <div class="roadmap-feature">Ready to contribute at scale</div>
         </div>
       </div>
     </div>
@@ -792,10 +857,10 @@ a{color:inherit;text-decoration:none;}
     </svg>
   </div>
   <div class="inner" style="position:relative;z-index:2;">
-    <div class="closing-eyebrow">Closing Statement</div>
-    <h2 class="closing-h">Contribution.<br>Growth. Next steps.</h2>
-    <p class="closing-body">Over three months at Barcode Entertainment, I contributed to creator intelligence infrastructure, campaign platforms, AI-powered workflows, and social intelligence research. The experience sharpened my technical skills and gave me practical exposure to the full stack of creator marketing operations.</p>
-    <p class="closing-body" style="margin-top:12px;">The tools and methods built here form a foundation for more intelligent, automated creator intelligence systems — and I look forward to continuing to build on them.</p>
+    <div class="closing-eyebrow">The Experience</div>
+    <h2 class="closing-h">Growth.<br>Contribution. Impact.</h2>
+    <p class="closing-body">Over three months at Barcode Entertainment, I progressed from learning the creator marketing ecosystem to contributing across creator intelligence, campaign intelligence, AI-powered workflows, social intelligence research, and creator data infrastructure.</p>
+    <p class="closing-body" style="margin-top:12px;">The experience sharpened my technical skills, gave me practical exposure to the full stack of creator marketing operations, and showed me how automation and AI can transform manual processes into scalable systems. I look forward to continuing to build on this foundation.</p>
     <div style="margin-top:40px;display:inline-block;border:1px solid rgba(255,255,255,0.09);padding:14px 28px;">
       <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.24);margin-bottom:5px;">Prepared by</div>
       <div style="font-size:20px;font-weight:900;color:#fff;letter-spacing:-0.5px;">Mehul Raul</div>
@@ -827,10 +892,8 @@ document.querySelectorAll('.tl-item, .project-card, .ach-card, .tech-node').forE
 
 /* SKILL BARS */
 const skillIO = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.skill-fill').forEach(b => b.style.width = b.dataset.width + '%'); skillIO.unobserve(e.target); } });
-}, { threshold: 0.3 });
-const sg = document.querySelector('.skills-grid');
-if (sg) skillIO.observe(sg);
+  // No longer needed - removed skill bars
+});
 
 /* KPI STRIP */
 const kpiIO = new IntersectionObserver((entries) => {
@@ -850,7 +913,7 @@ setTimeout(() => {
 
 /* NAV ACTIVE */
 const navLinks = document.querySelectorAll('.nav a');
-const sectionIds = ['hero','exec','journey','contributions','achievements','skills','tech','roadmap'];
+const sectionIds = ['hero','exec','journey','achievements','projects','skills','roadmap'];
 const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 function updateNav() {
   let current = sectionEls[0]?.id || '';
@@ -885,32 +948,12 @@ const BK = '#111111';
 (function(){
   const ctx = document.getElementById('phaseChart');
   if (!ctx) return;
-  new Chart(ctx, {
-    type:'bar',
-    data:{
-      labels:['Mar','Apr','May','Jun'],
-      datasets:[
-        { label:'Creator Infrastructure', data:[80,60,30,20], backgroundColor:'#111', borderWidth:0, borderRadius:2 },
-        { label:'Campaign Intelligence',  data:[10,70,60,30], backgroundColor:'rgba(17,17,17,0.40)', borderWidth:0, borderRadius:2 },
-        { label:'AI & Social Intelligence', data:[10,20,70,80], backgroundColor:'rgba(17,17,17,0.18)', borderWidth:0, borderRadius:2 }
-      ]
-    },
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'bottom',labels:{color:'rgba(0,0,0,0.48)',boxWidth:10,font:{size:10},padding:10}}, tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y}%`}} }, scales:{ x:{stacked:true,grid:{display:false},ticks:TL}, y:{stacked:true,grid:GL,ticks:{...TL,callback:v=>v+'%'},max:105} } }
-  });
 })();
 
 /* Domain horizontal bar */
 (function(){
   const ctx = document.getElementById('domainChart');
   if (!ctx) return;
-  new Chart(ctx, {
-    type:'bar',
-    data:{
-      labels:['Creator Intelligence','AI Products','Campaign Intelligence','Social Intelligence','Discovery Systems'],
-      datasets:[{ data:[90,82,80,84,70], backgroundColor:['#111','#333','#555','#777','#999'], borderWidth:0, borderRadius:2 }]
-    },
-    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` Depth: ${c.parsed.x}%`}} }, scales:{ x:{grid:GL,ticks:{...TL,callback:v=>v+'%'},max:100}, y:{grid:{display:false},ticks:{...TL,font:{size:10}}} } }
-  });
 })();
 </script>
 </body>
