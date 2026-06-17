@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Performance Review 2026 — Mehul Raul · Barcode Entertainment</title>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --bk:#080808; --bk2:#111; --bk3:#1a1a1a; --bk4:#242424;
+  --wh:#fff; --off:#f4f2ee; --off2:#eceae4;
+  --red:#e63329; --red-dim:rgba(230,51,41,0.14); --red-glow:rgba(230,51,41,0.07);
+  --mid:#555; --light:#777; --lighter:#999;
+  --rule:rgba(0,0,0,0.09); --rule-d:rgba(255,255,255,0.07);
+  --font:'League Spartan',system-ui,sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--wh);color:var(--bk);font-family:var(--font);-webkit-font-smoothing:antialiased;font-size:18px;line-height:1.65;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:400;background:var(--bk);display:flex;align-items:center;padding:0 32px;border-bottom:1px solid rgba(255,255,255,0.06);overflow-x:auto;scrollbar-width:none;height:52px;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-brand{display:flex;align-items:center;gap:10px;padding-right:20px;margin-right:16px;border-right:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+.nav-brand-logo{height:24px;width:auto;display:block;object-fit:contain;filter:brightness(0) invert(1) opacity(0.75);}
+.nav-brand-name{font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.40);text-transform:uppercase;}
+.nav a{font-size:9px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.35);text-transform:uppercase;padding:0 11px;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;height:52px;display:flex;align-items:center;transition:color .15s,border-color .15s;}
+.nav a:hover,.nav a.active{color:#fff;border-color:var(--red);}
+
+/* STRIPE PATTERN — Barcode-style zigzag background */
+.stripe-bg{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.stripe-bg svg{width:100%;height:100%;opacity:0.04;}
+
+/* COVER */
+.cover{background:var(--bk);min-height:100vh;display:grid;grid-template-columns:1.1fr 0.9fr;position:relative;overflow:hidden;}
+.cover-left{padding:60px 52px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(255,255,255,0.06);position:relative;z-index:2;}
+.cover-right{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:60px 44px;position:relative;z-index:2;}
+.cover-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;color:rgba(255,255,255,0.30);text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
+.cover-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--red);}
+.cover-logo-line{display:flex;align-items:center;gap:12px;margin-bottom:36px;}
+.cover-logo{height:30px;width:auto;display:block;object-fit:contain;filter:brightness(0) invert(1) opacity(0.80);}
+.cover-org{font-size:10px;font-weight:700;letter-spacing:2.5px;color:rgba(255,255,255,0.28);text-transform:uppercase;padding-left:12px;border-left:1px solid rgba(255,255,255,0.10);}
+.cover-h1{font-size:clamp(48px,5.2vw,82px);font-weight:900;color:#fff;line-height:0.91;letter-spacing:-3px;margin-bottom:22px;}
+.cover-h1 em{font-style:normal;color:var(--red);}
+.cover-title-line{font-size:clamp(12px,1.1vw,15px);font-weight:600;letter-spacing:0.5px;color:rgba(255,255,255,0.38);margin-bottom:24px;line-height:1.65;}
+.cover-desc{font-size:13px;color:rgba(255,255,255,0.44);max-width:460px;line-height:1.80;border-left:2px solid rgba(255,255,255,0.12);padding-left:16px;margin-bottom:44px;}
+.cover-meta{display:flex;flex-direction:column;gap:5px;}
+.cover-meta-row{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.22);display:flex;gap:8px;}
+.cover-meta-row strong{color:rgba(255,255,255,0.50);font-weight:800;}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-bottom:24px;}
+.kpi-cell{background:var(--bk2);padding:20px 18px;}
+.kpi-val{font-size:40px;font-weight:900;color:#fff;line-height:1;margin-bottom:4px;}
+.kpi-lbl{font-size:8px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.26);text-transform:uppercase;}
+
+/* Right panel */
+.cover-r-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:16px;}
+.tech-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:32px;}
+.tech-pill{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.32);}
+.cover-r-block{border:1px solid rgba(255,255,255,0.06);padding:20px;background:var(--bk2);width:100%;margin-bottom:12px;}
+.cover-r-block-title{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:10px;}
+.cover-r-item{font-size:12px;font-weight:700;color:rgba(255,255,255,0.48);line-height:2.0;}
+.cover-stat-big{font-size:clamp(80px,9vw,140px);font-weight:900;color:rgba(255,255,255,0.035);line-height:1;letter-spacing:-6px;position:absolute;bottom:32px;right:28px;pointer-events:none;}
+
+/* SECTIONS */
+.sec{padding:64px 48px;}
+.sec.dark{background:var(--bk);}
+.sec.grey{background:var(--off);}
+.sec.white{background:var(--wh);}
+.inner{max-width:1160px;margin:0 auto;}
+.eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:rgba(0,0,0,0.32);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.dark .eyebrow{color:rgba(255,255,255,0.26);}
+.eyebrow::before{content:'';display:block;width:18px;height:1px;background:rgba(0,0,0,0.28);}
+.dark .eyebrow::before{background:rgba(255,255,255,0.22);}
+.sec-h{font-size:clamp(28px,3vw,48px);font-weight:900;line-height:0.96;letter-spacing:-1.5px;margin-bottom:12px;}
+.dark .sec-h{color:#fff;}
+.sec-sub{font-size:14px;color:var(--mid);max-width:620px;line-height:1.70;margin-bottom:40px;}
+.dark .sec-sub{color:rgba(255,255,255,0.42);}
+
+/* KPI STRIP */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bk);border:1px solid var(--bk);margin-bottom:44px;}
+.kpi-strip-cell{background:var(--off2);padding:24px 20px;position:relative;overflow:hidden;}
+.kpi-strip-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--bk);}
+.kpi-strip-val{font-size:46px;font-weight:900;line-height:1;margin-bottom:5px;color:var(--bk);}
+.kpi-strip-lbl{font-size:9px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--mid);line-height:1.4;}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:44px;}
+.timeline::before{content:'';position:absolute;left:10px;top:10px;bottom:10px;width:1px;background:rgba(0,0,0,0.09);}
+.tl-item{position:relative;margin-bottom:32px;opacity:0;transform:translateX(-14px);transition:opacity .5s ease,transform .5s ease;}
+.tl-item.visible{opacity:1;transform:translateX(0);}
+.tl-dot{position:absolute;left:-38px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--bk);border:2.5px solid var(--wh);box-shadow:0 0 0 2px var(--bk);}
+.tl-date{font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.38);margin-bottom:3px;}
+.tl-title{font-size:16px;font-weight:900;color:var(--bk);margin-bottom:4px;}
+.tl-body{font-size:13px;color:var(--mid);line-height:1.65;}
+
+/* PILLAR */
+.pillar-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.pillar-num{font-size:48px;font-weight:900;color:rgba(0,0,0,0.05);line-height:1;flex-shrink:0;}
+.pillar-label{font-size:8px;font-weight:900;letter-spacing:3px;text-transform:uppercase;background:var(--bk);color:#fff;padding:3px 10px;margin-bottom:5px;display:inline-block;}
+.pillar-title{font-size:20px;font-weight:900;color:var(--bk);letter-spacing:-0.3px;}
+
+/* PROJECT CARDS */
+.project-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:10px;margin-bottom:44px;}
+.project-card{background:var(--off2);border:1px solid rgba(0,0,0,0.07);border-top:2px solid var(--bk);padding:22px 20px;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;}
+.project-card.visible{opacity:1;transform:translateY(0);}
+.proj-badge{font-size:8px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;margin-bottom:9px;display:inline-block;}
+.proj-badge.client{background:var(--bk);color:#fff;}
+.proj-badge.internal{background:rgba(0,0,0,0.08);color:var(--mid);}
+.proj-title{font-size:14px;font-weight:900;color:var(--bk);margin-bottom:7px;line-height:1.3;}
+.proj-problem{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--lighter);margin-bottom:3px;}
+.proj-body{font-size:13px;color:var(--mid);line-height:1.62;margin-bottom:10px;}
+.proj-tech{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+.tech-tag{font-size:8px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 7px;border:1px solid rgba(0,0,0,0.10);color:var(--mid);}
+.proj-impact{margin-top:10px;padding-top:8px;border-top:1px solid rgba(0,0,0,0.07);font-size:12px;color:var(--mid);line-height:1.55;}
+.proj-impact strong{color:var(--bk);font-weight:800;}
+
+/* ACHIEVEMENT CARDS */
+.achievement-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;}
+.ach-card{padding:22px 20px;background:var(--bk3);border:1px solid rgba(255,255,255,0.05);border-left:3px solid rgba(255,255,255,0.12);opacity:0;transform:translateX(-16px);transition:opacity .5s,transform .5s;}
+.ach-card.visible{opacity:1;transform:translateX(0);}
+.ach-icon{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.ach-icon svg{width:16px;height:16px;stroke:rgba(255,255,255,0.55);fill:none;stroke-width:2;}
+.ach-title{font-size:13px;font-weight:900;color:#fff;margin-bottom:5px;line-height:1.3;}
+.ach-body{font-size:13px;color:rgba(255,255,255,0.44);line-height:1.62;}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.skills-col-title{font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,0.40);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.skills-col-title::after{content:'';flex:1;height:1px;background:rgba(0,0,0,0.09);}
+.skill-bar-wrap{margin-bottom:12px;}
+.skill-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+.skill-name{font-size:12px;font-weight:800;color:var(--bk);}
+.skill-pct{font-size:11px;font-weight:900;color:var(--mid);}
+.skill-track{height:3px;background:rgba(0,0,0,0.07);}
+.skill-fill{height:100%;background:var(--bk);width:0%;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
+.pro-skills{display:flex;flex-wrap:wrap;gap:7px;}
+.pro-skill{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(0,0,0,0.11);color:var(--mid);}
+
+/* TECH NODES */
+.tech-map-canvas{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;}
+.tech-node{border:1px solid rgba(255,255,255,0.07);padding:18px 16px;background:var(--bk3);opacity:0;transform:scale(0.94);transition:opacity .5s,transform .5s,border-color .25s;}
+.tech-node.visible{opacity:1;transform:scale(1);}
+.tech-node:hover{border-color:rgba(255,255,255,0.18);}
+.tech-node-icon{font-size:18px;margin-bottom:6px;line-height:1;}
+.tech-node-name{font-size:13px;font-weight:900;color:#fff;margin-bottom:3px;}
+.tech-node-cat{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+.tech-node-desc{font-size:11px;color:rgba(255,255,255,0.36);line-height:1.5;margin-top:5px;}
+
+/* ROADMAP */
+.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);}
+.roadmap-cell{background:var(--bk2);padding:28px 24px;position:relative;overflow:hidden;}
+.roadmap-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,0.14);}
+.roadmap-num{font-size:72px;font-weight:900;color:rgba(255,255,255,0.025);line-height:1;position:absolute;top:16px;right:16px;letter-spacing:-4px;}
+.roadmap-initiative{font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.30);margin-bottom:8px;}
+.roadmap-title{font-size:17px;font-weight:900;color:#fff;margin-bottom:14px;line-height:1.2;letter-spacing:-0.3px;}
+.roadmap-features{display:flex;flex-direction:column;gap:7px;}
+.roadmap-feature{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:rgba(255,255,255,0.44);line-height:1.5;}
+.roadmap-feature::before{content:'';display:block;flex-shrink:0;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.30);margin-top:6px;}
+
+/* CLOSING */
+.closing{background:var(--bk);padding:80px 48px;text-align:center;position:relative;overflow:hidden;}
+.closing-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;color:rgba(255,255,255,0.25);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:14px;}
+.closing-eyebrow::before,.closing-eyebrow::after{content:'';display:block;width:32px;height:1px;background:rgba(255,255,255,0.15);}
+.closing-h{font-size:clamp(32px,3.8vw,58px);font-weight:900;color:#fff;line-height:0.95;letter-spacing:-2px;margin-bottom:24px;}
+.closing-body{font-size:14px;color:rgba(255,255,255,0.42);max-width:600px;margin:0 auto 36px;line-height:1.80;}
+.closing-sig{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.18);margin-top:40px;}
+
+/* CALLOUT */
+.callout{background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);border-left:3px solid rgba(0,0,0,0.25);padding:18px 22px;margin:20px 0;}
+.dark .callout{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);border-left-color:rgba(255,255,255,0.18);}
+.callout-title{font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--bk);margin-bottom:5px;}
+.dark .callout-title{color:#fff;}
+.callout-body{font-size:13px;color:var(--mid);line-height:1.65;}
+.dark .callout-body{color:rgba(255,255,255,0.46);}
+.callout-body strong{color:var(--bk);font-weight:800;}
+.dark .callout-body strong{color:#fff;}
+
+/* CHART CARD */
+.cc{background:var(--wh);border:1px solid rgba(0,0,0,0.09);padding:24px;}
+.grey .cc{background:var(--wh);}
+.dark .cc{background:var(--bk3);border-color:rgba(255,255,255,0.06);}
+.cc-ey{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,0.32);margin-bottom:4px;}
+.dark .cc-ey{color:rgba(255,255,255,0.26);}
+.cc-h{font-size:15px;font-weight:900;margin-bottom:18px;color:var(--bk);letter-spacing:-0.3px;}
+.dark .cc-h{color:#fff;}
+
+/* GRID UTILS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+
+.prose{font-size:13px;color:var(--mid);line-height:1.75;margin-bottom:12px;}
+.prose strong{color:var(--bk);font-weight:800;}
+.dark .prose{color:rgba(255,255,255,0.46);}
+.dark .prose strong{color:rgba(255,255,255,0.82);}
+
+.rule{height:1px;background:rgba(0,0,0,0.07);}
+.rule.heavy{height:2px;background:var(--bk);}
+
+@media(max-width:900px){
+  .cover{grid-template-columns:1fr;}
+  .cover-right{display:none;}
+  .kpi-strip{grid-template-columns:1fr 1fr;}
+  .g2,.g3,.skills-grid,.roadmap-grid{grid-template-columns:1fr;}
+  .roadmap-grid{background:none;gap:10px;}
+  .sec{padding:48px 20px;}
+}
+@media(max-width:600px){
+  .kpi-strip{grid-template-columns:1fr;}
+  .project-cards{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <img src="barcode-logo.webp" alt="Barcode" class="nav-brand-logo">
+    <span class="nav-brand-name">Barcode Entertainment</span>
+  </div>
+  <a href="#hero">Overview</a>
+  <a href="#exec">Summary</a>
+  <a href="#journey">Journey</a>
+  <a href="#contributions">Contributions</a>
+  <a href="#achievements">Achievements</a>
+  <a href="#skills">Skills</a>
+  <a href="#tech">Tech</a>
+  <a href="#roadmap">Roadmap</a>
+</nav>
+
+<!-- COVER -->
+<section class="cover" id="hero">
+  <!-- Barcode-style stripe pattern -->
+  <div class="stripe-bg">
+    <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="zigzag" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+          <polyline points="0,60 30,0 60,60 90,0 120,60" fill="none" stroke="white" stroke-width="1.2"/>
+          <polyline points="0,120 30,60 60,120 90,60 120,120" fill="none" stroke="white" stroke-width="1.2"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="900" fill="url(#zigzag)"/>
+    </svg>
+  </div>
+
+  <div class="cover-left">
+    <div>
+      <div class="cover-logo-line">
+        <img src="barcode-logo.webp" alt="Barcode Entertainment" class="cover-logo">
+        <span class="cover-org">Barcode Entertainment · 2026</span>
+      </div>
+      <div class="cover-eyebrow">Performance Review · AI &amp; Automation</div>
+      <h1 class="cover-h1">Mehul<br>Raul<em>.</em></h1>
+      <div class="cover-title-line">Performance Review 2026: Building Barcode's<br>Creator Intelligence Ecosystem</div>
+      <p class="cover-desc">Three months of building infrastructure, automation systems, and AI-powered tools across creator intelligence, campaign analytics, and social intelligence — contributing to workflows that support Barcode's growing creator marketing operations.</p>
+    </div>
+    <div>
+      <div class="kpi-grid">
+        <div class="kpi-cell">
+          <div class="kpi-val" id="kpi-systems">0</div>
+          <div class="kpi-lbl">Systems Built</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-val" id="kpi-ai">0</div>
+          <div class="kpi-lbl">AI Products</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-val" id="kpi-clients">0</div>
+          <div class="kpi-lbl">Client Platforms</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-val" id="kpi-domains">0</div>
+          <div class="kpi-lbl">Domains Covered</div>
+        </div>
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta-row"><strong>Role</strong> AI &amp; Automation Intern</div>
+        <div class="cover-meta-row"><strong>Duration</strong> March 2026 – June 2026</div>
+        <div class="cover-meta-row"><strong>Organization</strong> Barcode Entertainment · Ykone</div>
+        <div class="cover-meta-row"><strong>Report Date</strong> June 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-right">
+    <div class="cover-r-label">Technology Footprint</div>
+    <div class="tech-pills">
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">FastAPI</span>
+      <span class="tech-pill">React</span>
+      <span class="tech-pill">Celery</span>
+      <span class="tech-pill">Redis</span>
+      <span class="tech-pill">PostgreSQL</span>
+      <span class="tech-pill">Apify</span>
+      <span class="tech-pill">Google Apps Script</span>
+      <span class="tech-pill">AI Models</span>
+      <span class="tech-pill">Supabase</span>
+      <span class="tech-pill">SQLAlchemy</span>
+    </div>
+    <div class="cover-r-block">
+      <div class="cover-r-block-title">Domains</div>
+      <div class="cover-r-item">Creator Intelligence</div>
+      <div class="cover-r-item">Campaign Intelligence</div>
+      <div class="cover-r-item">Social Intelligence</div>
+      <div class="cover-r-item">AI Products &amp; Automation</div>
+      <div class="cover-r-item">Discovery Systems</div>
+    </div>
+    <div class="cover-r-block">
+      <div class="cover-r-block-title">Platforms Covered</div>
+      <div class="cover-r-item">YouTube · Instagram</div>
+      <div class="cover-r-item">Google Apps · Data APIs</div>
+      <div class="cover-r-item">Cross-Platform Workflows</div>
+    </div>
+  </div>
+  <div class="cover-stat-big">2026</div>
+</section>
+
+<div class="rule heavy"></div>
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="sec grey" id="exec">
+  <div class="inner">
+    <div class="eyebrow">01 — Executive Summary</div>
+    <h2 class="sec-h">The Work in Numbers</h2>
+    <p class="sec-sub">An overview of what was built, shipped, and delivered across a 3-month engagement covering engineering, automation, AI, and creator analytics.</p>
+    <div class="kpi-strip">
+      <div class="kpi-strip-cell">
+        <div class="kpi-strip-val" data-target="7">0</div>
+        <div class="kpi-strip-lbl">Major Systems<br>Built</div>
+      </div>
+      <div class="kpi-strip-cell">
+        <div class="kpi-strip-val" data-target="3">0</div>
+        <div class="kpi-strip-lbl">AI Products<br>Developed</div>
+      </div>
+      <div class="kpi-strip-cell">
+        <div class="kpi-strip-val" data-target="2">0</div>
+        <div class="kpi-strip-lbl">Client-Facing<br>Platforms</div>
+      </div>
+      <div class="kpi-strip-cell">
+        <div class="kpi-strip-val" data-target="5">0</div>
+        <div class="kpi-strip-lbl">Core Pillars of<br>Contribution</div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="cc">
+        <div class="cc-ey">Contribution Map</div>
+        <div class="cc-h">Effort Distribution Across Domains</div>
+        <div style="position:relative;height:240px;">
+          <canvas id="contribChart" role="img" aria-label="Radar chart showing contribution across five domains">Coverage across Creator Intelligence, Campaign Intelligence, AI Products, Discovery Systems, Social Intelligence.</canvas>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="callout">
+          <div class="callout-title">Joined During Team Formation</div>
+          <div class="callout-body">Came onboard during the early stages of Barcode's Tech Team. And now we are a team of five, and I will be <strong>building alongside the team</strong>.</div>
+        </div>
+        <div class="callout">
+          <div class="callout-title">Engineering + AI Overlap</div>
+          <div class="callout-body">Worked across backend engineering, automation pipelines, and AI workflows — contributing to <strong>both internal tools and client-facing platforms</strong> over the same period.</div>
+        </div>
+        <div class="callout">
+          <div class="callout-title">Breadth of Scope</div>
+          <div class="callout-body">Contributed across five distinct domains — from creator data infrastructure through to social intelligence research — which provided <strong>practical exposure across the full stack</strong> of creator marketing operations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- JOURNEY -->
+<section class="sec white" id="journey">
+  <div class="inner">
+    <div class="eyebrow">02 — The Journey</div>
+    <h2 class="sec-h">March to June 2026</h2>
+    <p class="sec-sub">A progression across three months — from foundational data tooling through to AI-assisted discovery and social intelligence reporting.</p>
+    <div class="g2">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">March 2026</div>
+          <div class="tl-title">Joined as AI &amp; Automation Intern</div>
+          <div class="tl-body">Onboarded at Barcode Entertainment. Got oriented with the team's existing workflows and infrastructure.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">March – April 2026</div>
+          <div class="tl-title">Creator Intelligence Infrastructure</div>
+          <div class="tl-body">Built creator average metrics pipeline and regional creator discovery workflows. Ongoing work includes creator database enrichment and regional creator discovery (current June tasks).</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">April 2026</div>
+          <div class="tl-title">Social Intelligence</div>
+          <div class="tl-body">Started foundational social intelligence research and narrative analysis across accounts.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Late April – May 2026</div>
+          <div class="tl-title">Sentiment Tagging &amp; Campaign Intelligence Platform</div>
+          <div class="tl-body">Developed sentiment tagging workflows and co-developed the Campaign Intelligence Platform backend (FastAPI + Celery + Supabase) for advanced campaign monitoring.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">May 2026</div>
+          <div class="tl-title">Adani Campaign Intelligence &amp; YouTube Creator Discovery V1</div>
+          <div class="tl-body">Delivered Adani Campaign Intelligence Platform backend and YouTube Creator Discovery Tool V1 — bringing automated creator sourcing to workflow.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">May End 2026</div>
+          <div class="tl-title">Influencer Radar V2</div>
+          <div class="tl-body">Built Influencer Radar V2 with AI-assisted scoring and multi-platform discovery capabilities integrated into unified workflows.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:rgba(0,0,0,0.12);box-shadow:0 0 0 2px rgba(0,0,0,0.20);border-color:var(--wh);"></div>
+          <div class="tl-date">June 2026 — Ongoing</div>
+          <div class="tl-title">Database Enrichment &amp; Regional Discovery</div>
+          <div class="tl-body">Continuing database enrichment workflows and expanding regional creator discovery capabilities to support ongoing sourcing operations.</div>
+        </div>
+      </div>
+      <div class="cc" style="align-self:start;">
+        <div class="cc-ey">Phase Progression</div>
+        <div class="cc-h">Effort Split by Month</div>
+        <div style="position:relative;height:260px;">
+          <canvas id="phaseChart" role="img" aria-label="Stacked bar chart showing effort distribution across March, April, May, June 2026">Creator infrastructure heaviest in March, campaign intelligence in April, AI and social intelligence growing through May-June.</canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- CONTRIBUTIONS -->
+<section class="sec grey" id="contributions">
+  <div class="inner">
+    <div class="eyebrow">03 — Core Contributions</div>
+    <h2 class="sec-h">Five Pillars of Work</h2>
+    <p class="sec-sub">Every project grouped by its domain. This covers the full scope of what was designed, built, and contributed to over three months.</p>
+
+    <!-- PILLAR 1 -->
+    <div class="pillar-header">
+      <div class="pillar-num">01</div>
+      <div>
+        <div class="pillar-label">Pillar 01</div>
+        <div class="pillar-title">Creator Intelligence Infrastructure</div>
+      </div>
+    </div>
+    <div class="project-cards">
+      <div class="project-card">
+        <span class="proj-badge internal">Internal</span>
+        <div class="proj-title">Creator Average Metrics Calculation Pipeline</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">Single posts don't accurately represent a creator's typical performance. Brands need baseline indicators that reflect consistent output, not outliers.</p>
+        <div class="proj-problem">The Solution</div>
+        <p class="proj-body">Automated pipeline that benchmarks creator performance across content history, generating standardized average metrics for evaluation.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Python</span><span class="tech-tag">Apify API</span><span class="tech-tag">Data Processing</span><span class="tech-tag">Automation</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Standardized creator benchmarking. Improved reliability of evaluation metrics used in sourcing decisions.</div>
+      </div>
+      <div class="project-card">
+        <span class="proj-badge internal">Internal</span>
+        <div class="proj-title">Regional Creator Discovery Tool</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">Finding regional and vernacular creators manually was slow and inconsistent. Existing methods lacked state-specific and language-specific coverage.</p>
+        <div class="proj-problem">The Solution</div>
+        <p class="proj-body">Automated discovery workflows to identify creators across Indian regions and vernacular languages in a repeatable, structured way.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Python</span><span class="tech-tag">Apify</span><span class="tech-tag">Automation</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Improved sourcing coverage across regional languages. Reduced time spent on manual discovery.</div>
+      </div>
+      <div class="project-card">
+        <span class="proj-badge internal">Ongoing</span>
+        <div class="proj-title">Creator Database Enrichment</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">The creator database had inconsistent metadata quality, making it harder to search and filter effectively.</p>
+        <div class="proj-problem">The Solution</div>
+        <p class="proj-body">Enrichment workflows covering region tagging, duplicate removal, metadata improvement, and creator classification to improve data quality.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Data Engineering</span><span class="tech-tag">Classification</span><span class="tech-tag">Automation</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Improved searchability and metadata consistency of Barcode's creator intelligence database.</div>
+      </div>
+    </div>
+
+    <!-- PILLAR 2 -->
+    <div class="pillar-header">
+      <div class="pillar-num">02</div>
+      <div>
+        <div class="pillar-label">Pillar 02</div>
+        <div class="pillar-title">Campaign Intelligence</div>
+      </div>
+    </div>
+    <div class="project-cards">
+      <div class="project-card">
+        <span class="proj-badge client">Client Project</span>
+        <div class="proj-title">Campaign Intelligence Platform — Adani</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">Tracking creator campaign deliverables manually was inefficient and lacked centralized visibility across assets.</p>
+        <div class="proj-problem">My Contribution</div>
+        <p class="proj-body">Backend architecture, data pipelines, automation workflows, and API integrations. Frontend was handled by Dhairya Muni.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Python</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Celery</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Redis</span><span class="tech-tag">Supabase</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Enabled centralized asset tracking and campaign monitoring for a live client campaign.</div>
+      </div>
+      <div class="project-card">
+        <span class="proj-badge client">Client Project</span>
+        <div class="proj-title">Campaign Intelligence Platform — Punjab</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">Campaign monitoring for Punjab-focused creator campaigns needed automation to reduce manual reporting effort.</p>
+        <div class="proj-problem">The Solution</div>
+        <p class="proj-body">Campaign intelligence workflows built in Google Apps Script to improve visibility and reporting efficiency for this campaign.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Google Apps Script</span><span class="tech-tag">Automation</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Improved campaign visibility and reduced manual overhead for the Punjab client campaign.</div>
+      </div>
+    </div>
+
+    <!-- PILLAR 3 -->
+    <div class="pillar-header">
+      <div class="pillar-num">03</div>
+      <div>
+        <div class="pillar-label">Pillar 03</div>
+        <div class="pillar-title">AI Products</div>
+      </div>
+    </div>
+    <div class="project-cards">
+      <div class="project-card">
+        <span class="proj-badge internal">Internal</span>
+        <div class="proj-title">Creator Sentiment Analysis Tool</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">Manual sentiment analysis of creator audiences was time-consuming and produced inconsistent results across different evaluators.</p>
+        <div class="proj-problem">The Solution</div>
+        <p class="proj-body">AI-assisted sentiment evaluation with automated tagging, creator scoring, and key insight generation built into the workflow.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Google Apps Script</span><span class="tech-tag">AI Models</span><span class="tech-tag">Automation</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Reduced manual evaluation effort and brought more consistency to creator sentiment scoring.</div>
+      </div>
+      <div class="project-card">
+        <span class="proj-badge internal">Internal</span>
+        <div class="proj-title">Influencer Radar V2</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">Creator discovery was fragmented — multiple tools, manual searches, inconsistent criteria. No unified discovery surface existed.</p>
+        <div class="proj-problem">The Solution</div>
+        <p class="proj-body">Multi-platform creator discovery tool combining YouTube search, Instagram discovery, vernacular creator identification, and AI-assisted recommendations driven by campaign brief inputs.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Python</span><span class="tech-tag">AI Workflows</span><span class="tech-tag">Multi-Platform</span><span class="tech-tag">Automation</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Unified fragmented discovery into one workflow. Improved speed and coverage of creator sourcing.</div>
+      </div>
+    </div>
+
+    <!-- PILLAR 4 -->
+    <div class="pillar-header">
+      <div class="pillar-num">04</div>
+      <div>
+        <div class="pillar-label">Pillar 04</div>
+        <div class="pillar-title">Discovery Systems</div>
+      </div>
+    </div>
+    <div class="project-cards">
+      <div class="project-card">
+        <span class="proj-badge internal">Internal</span>
+        <div class="proj-title">YouTube Creator Search Tool V1</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">YouTube creator discovery was entirely manual — slow, inconsistent, and leaving talent pools underexplored during campaign sourcing.</p>
+        <div class="proj-problem">The Solution</div>
+        <p class="proj-body">Creator search tool built in Google Apps Script for structured, repeatable discovery across YouTube's creator ecosystem.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Google Apps Script</span><span class="tech-tag">YouTube API</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Improved creator identification speed and established a repeatable discovery workflow for the team.</div>
+      </div>
+    </div>
+
+    <!-- PILLAR 5 -->
+    <div class="pillar-header">
+      <div class="pillar-num">05</div>
+      <div>
+        <div class="pillar-label">Pillar 05</div>
+        <div class="pillar-title">Social Intelligence</div>
+      </div>
+    </div>
+    <div class="project-cards">
+      <div class="project-card" style="grid-column:1/-1;">
+        <span class="proj-badge internal">Strategic Research</span>
+        <div class="proj-title">Social Intelligence Research — Adani Cement · Saudi Social · Adani DOJ</div>
+        <div class="proj-problem">The Problem</div>
+        <p class="proj-body">Understanding public narratives and sentiment around brands requires structured research across social media at a scale that manual methods can't sustain.</p>
+        <div class="proj-problem">The Solution</div>
+        <p class="proj-body">Social listening and intelligence research across three accounts. Each report covered narrative mapping, sentiment analysis, influencer impact, and brand implications — structured for stakeholder review.</p>
+        <div class="proj-tech">
+          <span class="tech-tag">Apify</span><span class="tech-tag">AI Models</span><span class="tech-tag">Social Listening</span><span class="tech-tag">Analytics</span><span class="tech-tag">Report Design</span>
+        </div>
+        <div class="proj-impact"><strong>Impact:</strong> Delivered actionable intelligence across three client verticals. Helped establish a repeatable social intelligence research methodology.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ACHIEVEMENTS -->
+<section class="sec dark" id="achievements">
+  <div class="inner">
+    <div class="eyebrow">04 — Key Achievements</div>
+    <h2 class="sec-h">What Was Delivered</h2>
+    <p class="sec-sub">A summary of the meaningful outputs from this engagement — across tools, platforms, and processes.</p>
+    <div class="achievement-grid">
+      <div class="ach-card">
+        <div class="ach-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+        <div class="ach-title">Contributed During Team Formation</div>
+        <div class="ach-body">Joined while Barcode's creator intelligence team was still taking shape. Helped build initial tooling and workflows alongside the team in its early stages.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+        <div class="ach-title">Multiple Tools Moved to Daily Use</div>
+        <div class="ach-body">Several tools built during this engagement progressed from initial build to active use within the team — not just proofs of concept.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+        <div class="ach-title">Backend Work on Client Platforms</div>
+        <div class="ach-body">Contributed backend engineering to client-facing campaign platforms — real campaign data flowing through systems built as part of this engagement.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
+        <div class="ach-title">Manual Workflows Replaced with Automation</div>
+        <div class="ach-body">Several previously manual processes — creator discovery, metrics calculation, sentiment evaluation — now run through automated pipelines.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+        <div class="ach-title">AI Scoring Added to Creator Evaluation</div>
+        <div class="ach-body">Brought AI-assisted sentiment analysis and creator scoring into the team's toolkit — a capability that was previously unavailable.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+        <div class="ach-title">Worked Across Engineering, AI, and Analytics</div>
+        <div class="ach-body">Operated across backend systems, data pipelines, and AI workflow design — across multiple projects simultaneously over the internship period.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg></div>
+        <div class="ach-title">Structured Intelligence Reports Delivered</div>
+        <div class="ach-body">Social intelligence research packaged into clear, actionable reports for stakeholder review — covering sentiment, narratives, and brand implications.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- SKILLS -->
+<section class="sec grey" id="skills">
+  <div class="inner">
+    <div class="eyebrow">05 — Skills &amp; Growth</div>
+    <h2 class="sec-h">What Was Learned</h2>
+    <p class="sec-sub">Technical and professional skills developed through hands-on work — every item below was exercised on a real project during this engagement.</p>
+    <div class="skills-grid">
+      <div>
+        <div class="skills-col-title">Technical Skills</div>
+        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Python · Automation Pipelines</span><span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-fill" data-width="90"></div></div></div>
+        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">FastAPI · Backend Engineering</span><span class="skill-pct">78%</span></div><div class="skill-track"><div class="skill-fill" data-width="78"></div></div></div>
+        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Google Apps Script</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" data-width="85"></div></div></div>
+        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Apify · Web Scraping APIs</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill" data-width="88"></div></div></div>
+        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">AI Workflow Design</span><span class="skill-pct">82%</span></div><div class="skill-track"><div class="skill-fill" data-width="82"></div></div></div>
+        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Data Engineering · Pipelines</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill" data-width="80"></div></div></div>
+        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Social Intelligence · Analytics</span><span class="skill-pct">84%</span></div><div class="skill-track"><div class="skill-fill" data-width="84"></div></div></div>
+        <div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-name">Sentiment Analysis Systems</span><span class="skill-pct">79%</span></div><div class="skill-track"><div class="skill-fill" data-width="79"></div></div></div>
+      </div>
+      <div>
+        <div class="skills-col-title">Professional Growth</div>
+        <div class="pro-skills">
+          <span class="pro-skill">Problem Solving</span>
+          <span class="pro-skill">Ownership</span>
+          <span class="pro-skill">Stakeholder Collaboration</span>
+          <span class="pro-skill">Requirement Analysis</span>
+          <span class="pro-skill">Cross-functional Communication</span>
+          <span class="pro-skill">System Thinking</span>
+          <span class="pro-skill">Scalable Solution Design</span>
+          <span class="pro-skill">Adaptability</span>
+          <span class="pro-skill">AI-First Thinking</span>
+          <span class="pro-skill">Self-Direction</span>
+          <span class="pro-skill">Prioritization</span>
+        </div>
+        <div style="margin-top:24px;">
+          <div class="cc">
+            <div class="cc-ey">Domain Coverage</div>
+            <div class="cc-h">Relative Depth Across Five Domains</div>
+            <div style="position:relative;height:200px;">
+              <canvas id="domainChart" role="img" aria-label="Horizontal bar chart showing domain depth across five areas">Creator Intelligence 90%, Social Intelligence 84%, AI Products 82%, Campaign Intelligence 80%, Discovery Systems 70%.</canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- TECH ECOSYSTEM -->
+<section class="sec dark" id="tech">
+  <div class="inner">
+    <!-- Stripe pattern in dark section too -->
+    <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0.03;">
+      <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;" xmlns="http://www.w3.org/2000/svg">
+        <defs><pattern id="zigzag2" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse"><polyline points="0,60 30,0 60,60 90,0 120,60" fill="none" stroke="white" stroke-width="1.5"/><polyline points="0,120 30,60 60,120 90,60 120,120" fill="none" stroke="white" stroke-width="1.5"/></pattern></defs>
+        <rect width="1200" height="600" fill="url(#zigzag2)"/>
+      </svg>
+    </div>
+    <div style="position:relative;z-index:2;">
+      <div class="eyebrow">06 — Technology Ecosystem</div>
+      <h2 class="sec-h">The Full Stack</h2>
+      <p class="sec-sub">Every technology deployed across the body of work — from data collection through to AI analysis and client-facing platforms.</p>
+      <div class="tech-map-canvas">
+        <div class="tech-node"><div class="tech-node-icon">🐍</div><div class="tech-node-name">Python</div><div class="tech-node-cat">Core Language</div><div class="tech-node-desc">Primary language across all pipelines, automation, and data processing systems.</div></div>
+        <div class="tech-node"><div class="tech-node-icon">⚡</div><div class="tech-node-name">FastAPI</div><div class="tech-node-cat">Backend Framework</div><div class="tech-node-desc">Async API backend powering the Campaign Intelligence Platform.</div></div>
+        <div class="tech-node"><div class="tech-node-icon">⚛️</div><div class="tech-node-name">React</div><div class="tech-node-cat">Frontend</div><div class="tech-node-desc">Frontend framework for the Campaign Intelligence Dashboard interface.</div></div>
+        <div class="tech-node"><div class="tech-node-icon">🌿</div><div class="tech-node-name">Celery</div><div class="tech-node-cat">Task Queue</div><div class="tech-node-desc">Distributed task queue for async pipeline and job processing.</div></div>
+        <div class="tech-node"><div class="tech-node-icon">🗄️</div><div class="tech-node-name">PostgreSQL / Supabase</div><div class="tech-node-cat">Database</div><div class="tech-node-desc">Relational storage for campaign and creator intelligence platforms.</div></div>
+        <div class="tech-node"><div class="tech-node-icon">🔴</div><div class="tech-node-name">Redis</div><div class="tech-node-cat">Cache &amp; Queue</div><div class="tech-node-desc">Message broker and caching layer for Celery workflows.</div></div>
+        <div class="tech-node"><div class="tech-node-icon">🤖</div><div class="tech-node-name">Apify</div><div class="tech-node-cat">Data Collection</div><div class="tech-node-desc">Social media data collection across Instagram and YouTube.</div></div>
+        <div class="tech-node"><div class="tech-node-icon">📜</div><div class="tech-node-name">Google Apps Script</div><div class="tech-node-cat">Automation</div><div class="tech-node-desc">Rapid automation for creator discovery tools and campaign workflows.</div></div>
+        <div class="tech-node"><div class="tech-node-icon">✨</div><div class="tech-node-name">AI Models</div><div class="tech-node-cat">Intelligence Layer</div><div class="tech-node-desc">Gemini and related models for sentiment analysis, scoring, and insight generation.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ROADMAP -->
+<section class="sec dark" id="roadmap">
+  <div class="inner">
+    <div class="eyebrow">07 — Future Roadmap</div>
+    <h2 class="sec-h">Looking Ahead</h2>
+    <p class="sec-sub">Three directions that extend the work done during this engagement into more automated, AI-native creator intelligence systems.</p>
+    <div class="roadmap-grid">
+      <div class="roadmap-cell">
+        <div class="roadmap-num">01</div>
+        <div class="roadmap-initiative">Initiative 01</div>
+        <div class="roadmap-title">AI-Powered Campaign Intelligence Platform</div>
+        <div class="roadmap-features">
+          <div class="roadmap-feature">Natural Language Campaign Querying</div>
+          <div class="roadmap-feature">Automated AI Performance Insights</div>
+          <div class="roadmap-feature">Intelligent Campaign Recommendations</div>
+          <div class="roadmap-feature">Real-Time Asset Monitoring</div>
+        </div>
+      </div>
+      <div class="roadmap-cell">
+        <div class="roadmap-num">02</div>
+        <div class="roadmap-initiative">Initiative 02</div>
+        <div class="roadmap-title">Automated Sentiment Intelligence Engine</div>
+        <div class="roadmap-features">
+          <div class="roadmap-feature">Real-Time Sentiment Tracking</div>
+          <div class="roadmap-feature">Automated Narrative Detection</div>
+          <div class="roadmap-feature">Insight Generation Pipelines</div>
+          <div class="roadmap-feature">Cross-Platform Signal Aggregation</div>
+        </div>
+      </div>
+      <div class="roadmap-cell">
+        <div class="roadmap-num">03</div>
+        <div class="roadmap-initiative">Initiative 03</div>
+        <div class="roadmap-title">Unified Creator Intelligence Platform</div>
+        <div class="roadmap-features">
+          <div class="roadmap-feature">Cross-Platform Creator Discovery</div>
+          <div class="roadmap-feature">AI Creator Ranking Engine</div>
+          <div class="roadmap-feature">Predictive Creator Recommendations</div>
+          <div class="roadmap-feature">Campaign Brief–Driven Search</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0.035;">
+    <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="zigzag3" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse"><polyline points="0,60 30,0 60,60 90,0 120,60" fill="none" stroke="white" stroke-width="1.5"/><polyline points="0,120 30,60 60,120 90,60 120,120" fill="none" stroke="white" stroke-width="1.5"/></pattern></defs>
+      <rect width="1200" height="500" fill="url(#zigzag3)"/>
+    </svg>
+  </div>
+  <div class="inner" style="position:relative;z-index:2;">
+    <div class="closing-eyebrow">Closing Statement</div>
+    <h2 class="closing-h">Contribution.<br>Growth. Next steps.</h2>
+    <p class="closing-body">Over three months at Barcode Entertainment, I contributed to creator intelligence infrastructure, campaign platforms, AI-powered workflows, and social intelligence research. The experience sharpened my technical skills and gave me practical exposure to the full stack of creator marketing operations.</p>
+    <p class="closing-body" style="margin-top:12px;">The tools and methods built here form a foundation for more intelligent, automated creator intelligence systems — and I look forward to continuing to build on them.</p>
+    <div style="margin-top:40px;display:inline-block;border:1px solid rgba(255,255,255,0.09);padding:14px 28px;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.24);margin-bottom:5px;">Prepared by</div>
+      <div style="font-size:20px;font-weight:900;color:#fff;letter-spacing:-0.5px;">Mehul Raul</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,0.30);text-transform:uppercase;margin-top:3px;">AI &amp; Automation · Barcode Entertainment · June 2026</div>
+    </div>
+    <div class="closing-sig">Barcode Entertainment · Performance Review 2026 · Confidential</div>
+  </div>
+</section>
+
+<script>
+/* COUNTER */
+function animateCounter(el, target, duration) {
+  let start = null;
+  function step(ts) {
+    if (!start) start = ts;
+    const progress = Math.min((ts - start) / duration, 1);
+    el.textContent = Math.floor(progress * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(step);
+}
+
+/* INTERSECTION OBSERVER — reveal */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.tl-item, .project-card, .ach-card, .tech-node').forEach(el => io.observe(el));
+
+/* SKILL BARS */
+const skillIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.skill-fill').forEach(b => b.style.width = b.dataset.width + '%'); skillIO.unobserve(e.target); } });
+}, { threshold: 0.3 });
+const sg = document.querySelector('.skills-grid');
+if (sg) skillIO.observe(sg);
+
+/* KPI STRIP */
+const kpiIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('[data-target]').forEach((el, i) => setTimeout(() => animateCounter(el, parseInt(el.dataset.target), 1100), i * 100)); kpiIO.unobserve(e.target); } });
+}, { threshold: 0.3 });
+const ks = document.querySelector('.kpi-strip');
+if (ks) kpiIO.observe(ks);
+
+/* HERO COUNTERS */
+const heroTargets = { 'kpi-systems':7, 'kpi-ai':3, 'kpi-clients':2, 'kpi-domains':5 };
+setTimeout(() => {
+  Object.entries(heroTargets).forEach(([id, val], i) => {
+    const el = document.getElementById(id);
+    if (el) setTimeout(() => animateCounter(el, val, 1300), i * 180 + 500);
+  });
+}, 400);
+
+/* NAV ACTIVE */
+const navLinks = document.querySelectorAll('.nav a');
+const sectionIds = ['hero','exec','journey','contributions','achievements','skills','tech','roadmap'];
+const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+function updateNav() {
+  let current = sectionEls[0]?.id || '';
+  sectionEls.forEach(s => { if (window.scrollY >= s.offsetTop - 72) current = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href').replace('#','') === current));
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+navLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior:'smooth', block:'start' }); }));
+
+/* CHARTS */
+Chart.defaults.font.family = "'League Spartan', system-ui, sans-serif";
+Chart.defaults.font.size = 11;
+const GL = { color:'rgba(0,0,0,0.06)', borderDash:[2,4] };
+const TL = { color:'rgba(0,0,0,0.42)', font:{size:11} };
+const BK = '#111111';
+
+/* Radar */
+(function(){
+  const ctx = document.getElementById('contribChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type:'radar',
+    data:{
+      labels:['Creator Intelligence','Campaign Intelligence','AI Products','Discovery Systems','Social Intelligence'],
+      datasets:[{ data:[90,80,75,70,85], backgroundColor:'rgba(17,17,17,0.07)', borderColor:'rgba(17,17,17,0.60)', borderWidth:1.5, pointBackgroundColor:BK, pointRadius:3, pointHoverRadius:5 }]
+    },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` Depth: ${c.parsed.r}%`}} }, scales:{ r:{ min:0, max:100, grid:{color:'rgba(0,0,0,0.07)'}, pointLabels:{font:{size:11,weight:700},color:'rgba(0,0,0,0.48)'}, ticks:{display:false} } } }
+  });
+})();
+
+/* Phase stacked bar */
+(function(){
+  const ctx = document.getElementById('phaseChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels:['Mar','Apr','May','Jun'],
+      datasets:[
+        { label:'Creator Infrastructure', data:[80,60,30,20], backgroundColor:'#111', borderWidth:0, borderRadius:2 },
+        { label:'Campaign Intelligence',  data:[10,70,60,30], backgroundColor:'rgba(17,17,17,0.40)', borderWidth:0, borderRadius:2 },
+        { label:'AI & Social Intelligence', data:[10,20,70,80], backgroundColor:'rgba(17,17,17,0.18)', borderWidth:0, borderRadius:2 }
+      ]
+    },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'bottom',labels:{color:'rgba(0,0,0,0.48)',boxWidth:10,font:{size:10},padding:10}}, tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y}%`}} }, scales:{ x:{stacked:true,grid:{display:false},ticks:TL}, y:{stacked:true,grid:GL,ticks:{...TL,callback:v=>v+'%'},max:105} } }
+  });
+})();
+
+/* Domain horizontal bar */
+(function(){
+  const ctx = document.getElementById('domainChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels:['Creator Intelligence','AI Products','Campaign Intelligence','Social Intelligence','Discovery Systems'],
+      datasets:[{ data:[90,82,80,84,70], backgroundColor:['#111','#333','#555','#777','#999'], borderWidth:0, borderRadius:2 }]
+    },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` Depth: ${c.parsed.x}%`}} }, scales:{ x:{grid:GL,ticks:{...TL,callback:v=>v+'%'},max:100}, y:{grid:{display:false},ticks:{...TL,font:{size:10}}} } }
+  });
+})();
+</script>
+</body>
+</html>
