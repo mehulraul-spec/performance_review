@@ -28,6 +28,12 @@ a{color:inherit;text-decoration:none;}
 .nav-brand-name{font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.65);text-transform:uppercase;}
 .nav a{font-size:10px;font-weight:800;letter-spacing:2.5px;color:rgba(255,255,255,0.52);text-transform:uppercase;padding:0 14px;white-space:nowrap;flex-shrink:0;border-bottom:3px solid transparent;height:56px;display:flex;align-items:center;transition:color .15s,border-color .15s;}
 .nav a:hover,.nav a.active{color:#fff;border-color:var(--red);}
+.nav-toggle{display:none;flex-shrink:0;margin-left:auto;width:40px;height:40px;border:none;background:transparent;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;}
+.nav-toggle span{display:block;width:22px;height:2px;background:#fff;transition:transform .25s,opacity .25s;}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile-panel{display:none;}
 
 /* STRIPE PATTERN — Barcode-style zigzag background */
 .stripe-bg{
@@ -52,16 +58,16 @@ a{color:inherit;text-decoration:none;}
 .cover-meta{display:flex;flex-direction:column;gap:8px;}
 .cover-meta-row{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000;display:flex;gap:10px;}
 .cover-meta-row strong{color:#000;font-weight:900;}
-.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#000;border:2px solid #000;margin-bottom:24px;}
-.kpi-cell{background:#f5f5f5;padding:24px 20px;}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:transparent;border:none;margin-bottom:24px;}
+.kpi-cell{background:#f5f5f5;padding:24px 20px;border:2px solid #000;border-radius:24px;}
 .kpi-val{font-size:48px;font-weight:900;color:#000;line-height:1;margin-bottom:4px;}
 .kpi-lbl{font-size:10px;font-weight:800;letter-spacing:2px;color:#333;text-transform:uppercase;}
 
 /* Right panel */
 .cover-r-label{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#000;margin-bottom:20px;}
 .tech-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
-.tech-pill{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:8px 14px;border:1.5px solid #000;color:#000;background:#fff;}
-.cover-r-block{border:2px solid #000;padding:24px;background:#f5f5f5;width:100%;margin-bottom:16px;}
+.tech-pill{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:8px 14px;border:1.5px solid #000;color:#000;background:#fff;border-radius:16px;}
+.cover-r-block{border:2px solid #000;padding:24px;background:#f5f5f5;width:100%;margin-bottom:16px;border-radius:16px;}
 .cover-r-block-title{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#000;margin-bottom:14px;}
 .cover-r-item{font-size:13px;font-weight:600;color:#000;line-height:2.0;}
 .cover-stat-big{font-size:clamp(80px,9vw,140px);font-weight:900;color:rgba(0,0,0,0.05);line-height:1;letter-spacing:-6px;position:absolute;bottom:32px;right:28px;pointer-events:none;}
@@ -99,7 +105,7 @@ a{color:inherit;text-decoration:none;}
 .tl-body{font-size:15px;color:#333;line-height:1.7;}
 
 /* JOURNEY PHASES */
-.journey-phase{background:#f9f9f9;border:2px solid #000;padding:32px;margin-bottom:20px;}
+.journey-phase{background:#f9f9f9;border:2px solid #000;padding:32px;margin-bottom:20px;border-radius:16px;}
 .journey-period{font-size:12px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
 .journey-title{font-size:22px;font-weight:900;color:#000;margin-bottom:24px;line-height:1.2;}
 .journey-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;}
@@ -119,22 +125,27 @@ a{color:inherit;text-decoration:none;}
 
 /* PROJECT CARDS */
 .project-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:48px;}
-.project-card{background:#f9f9f9;border:2px solid #000;border-top:4px solid var(--red);padding:28px 24px;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;}
+.project-card{background:#f9f9f9;border:2px solid #000;border-top:4px solid var(--red);padding:28px 24px;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;border-radius:16px;display:flex;flex-direction:column;}
 .project-card.visible{opacity:1;transform:translateY(0);}
-.proj-badge{font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;margin-bottom:12px;display:inline-block;}
+.proj-badge{font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;margin-bottom:12px;display:inline-block;border-radius:16px;}
 .proj-badge.client{background:#000;color:#fff;}
 .proj-badge.internal{background:rgba(0,0,0,0.1);color:#000;}
 .proj-title{font-size:16px;font-weight:900;color:#000;margin-bottom:10px;line-height:1.3;}
 .proj-problem{font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:#000;margin-bottom:6px;}
 .proj-body{font-size:15px;color:#333;line-height:1.68;margin-bottom:12px;}
 .proj-tech{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-.tech-tag{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border:1.5px solid #000;color:#000;background:#fff;}
+.tech-tag{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border:1.5px solid #000;color:#000;background:#fff;border-radius:16px;}
 .proj-impact{margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.1);font-size:14px;color:#333;line-height:1.6;}
 .proj-impact strong{color:#000;font-weight:900;}
+.proj-cta{margin-top:auto;padding-top:16px;}
+.proj-cta a{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#000;padding:11px 18px;border-radius:16px;border:2px solid #000;transition:background .2s,color .2s;}
+.proj-cta a:hover{background:var(--red);border-color:var(--red);}
+.proj-cta-internal{margin-top:auto;padding-top:16px;}
+.proj-cta-internal span{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#666;background:transparent;padding:11px 18px;border-radius:16px;border:1.5px dashed rgba(0,0,0,0.3);}
 
 /* ACHIEVEMENT CARDS */
 .achievement-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;}
-.ach-card{padding:28px 24px;background:#f5f5f5;border:2px solid #000;border-left:5px solid var(--red);opacity:0;transform:translateX(-16px);transition:opacity .5s,transform .5s;}
+.ach-card{padding:28px 24px;background:#f5f5f5;border:2px solid #000;border-left:5px solid var(--red);opacity:0;transform:translateX(-16px);transition:opacity .5s,transform .5s;border-radius:16px;}
 .ach-card.visible{opacity:1;transform:translateX(0);}
 .ach-icon{width:40px;height:40px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
 .ach-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;}
@@ -152,7 +163,7 @@ a{color:inherit;text-decoration:none;}
 .skill-track{height:4px;background:rgba(0,0,0,0.1);}
 .skill-fill{height:100%;background:#000;width:0%;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
 .pro-skills{display:flex;flex-wrap:wrap;gap:8px;}
-.pro-skill{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;border:1.5px solid #000;color:#000;background:#fff;}
+.pro-skill{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;border:1.5px solid #000;color:#000;background:#fff;border-radius:16px;}
 
 /* TECH NODES */
 .tech-map-canvas{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;}
@@ -165,8 +176,8 @@ a{color:inherit;text-decoration:none;}
 .tech-node-desc{font-size:12px;color:#333;line-height:1.55;margin-top:6px;}
 
 /* ROADMAP */
-.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#000;border:2px solid #000;}
-.roadmap-cell{background:#f5f5f5;padding:32px 28px;position:relative;overflow:hidden;}
+.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:transparent;border:none;}
+.roadmap-cell{background:#f5f5f5;padding:32px 28px;position:relative;overflow:hidden;border:2px solid #000;border-radius:16px;}
 .roadmap-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:0;background:none;}
 .roadmap-num{font-size:80px;font-weight:900;color:rgba(0,0,0,0.06);line-height:1;position:absolute;top:12px;right:12px;letter-spacing:-4px;}
 .roadmap-initiative{font-size:10px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:#000;margin-bottom:10px;}
@@ -184,7 +195,7 @@ a{color:inherit;text-decoration:none;}
 .closing-sig{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:48px;}
 
 /* CALLOUT */
-.callout{background:#f5f5f5;border:2px solid #000;border-left:5px solid var(--red);padding:22px 26px;margin:24px 0;}
+.callout{background:#f5f5f5;border:2px solid #000;border-left:5px solid var(--red);padding:22px 26px;margin:24px 0;border-radius:16px;}
 .dark .callout{background:#f5f5f5;border-color:#000;border-left-color:var(--red);}
 .callout-title{font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#000;margin-bottom:8px;}
 .dark .callout-title{color:#000;}
@@ -215,17 +226,39 @@ a{color:inherit;text-decoration:none;}
 .rule.heavy{height:2px;background:#000;}
 
 @media(max-width:900px){
-  .cover{grid-template-columns:1fr;}
+  .nav{padding:0 16px;}
+  .nav-toggle{display:flex;}
+  .nav a{display:none;}
+  .nav-brand{margin-right:auto;border-right:none;padding-right:0;}
+  .nav-mobile-panel{display:none;flex-direction:column;background:var(--bk);border-bottom:2px solid rgba(255,255,255,0.12);position:sticky;top:56px;z-index:399;}
+  .nav-mobile-panel.open{display:flex;}
+  .nav-mobile-panel a{font-size:12px;font-weight:800;letter-spacing:2.5px;color:rgba(255,255,255,0.7);text-transform:uppercase;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.08);height:auto;border-left:3px solid transparent;}
+  .nav-mobile-panel a.active{color:#fff;border-left-color:var(--red);background:rgba(255,255,255,0.04);}
+
+  .cover{grid-template-columns:1fr;min-height:auto;}
   .cover-right{display:none;}
-  .kpi-strip{grid-template-columns:1fr 1fr;}
-  .g2,.g3,.skills-grid,.roadmap-grid{grid-template-columns:1fr;}
-  .roadmap-grid{background:none;gap:10px;}
+  .cover-left{padding:40px 20px;}
+  .cover-stat-big{display:none;}
+
+  .kpi-grid{grid-template-columns:1fr;gap:10px;}
+  .kpi-strip{grid-template-columns:1fr;}
+
+  .g2,.g3,.skills-grid{grid-template-columns:1fr;}
+  .roadmap-grid{grid-template-columns:1fr;background:none;gap:10px;}
+
+  .journey-content{grid-template-columns:1fr;}
+  .project-cards{grid-template-columns:1fr;}
+  .achievement-grid{grid-template-columns:1fr;}
+
   .sec{padding:48px 20px;}
 }
 @media(max-width:600px){
   .kpi-strip{grid-template-columns:1fr;}
   .project-cards{grid-template-columns:1fr;}
+  .cover-h1{letter-spacing:-2px;}
+  .journey-phase{padding:24px 20px;}
 }
+html,body{max-width:100%;overflow-x:hidden;}
 </style>
 </head>
 <body>
@@ -245,7 +278,19 @@ a{color:inherit;text-decoration:none;}
   <a href="#projects">Key Projects</a>
   <a href="#skills">Growth</a>
   <a href="#roadmap">Roadmap</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-panel" id="navMobilePanel">
+  <a href="#hero">Overview</a>
+  <a href="#exec">Summary</a>
+  <a href="#journey">Journey</a>
+  <a href="#achievements">Achievements</a>
+  <a href="#projects">Key Projects</a>
+  <a href="#skills">Growth</a>
+  <a href="#roadmap">Roadmap</a>
+</div>
 
 <!-- COVER -->
 <section class="cover" id="hero">
@@ -620,49 +665,70 @@ a{color:inherit;text-decoration:none;}
   <div class="inner">
     <div class="eyebrow">04 — Key Projects</div>
     <h2 class="sec-h">What Was Built</h2>
-    <p class="sec-sub">Seven key projects delivered during the engagement — focused on impact rather than technical detail.</p>
+    <p class="sec-sub">Nine key projects delivered during the engagement — focused on impact rather than technical detail.</p>
     <div class="project-cards">
       <div class="project-card">
         <span class="proj-badge internal">Creator Intelligence</span>
         <div class="proj-title">Creator Average Metrics Pipeline</div>
         <div class="proj-body">Automated system to benchmark creator performance using historical content data. Replaced manual analysis with standardized metrics.</div>
         <div class="proj-impact"><strong>Impact:</strong> Improved consistency of creator evaluation across the sourcing team.</div>
+        <div class="proj-cta-internal"><span>Internal Barcode Project</span></div>
+      </div>
+      <div class="project-card">
+        <span class="proj-badge internal">Creator Intelligence</span>
+        <div class="proj-title">YouTube Creator Search Tool V1</div>
+        <div class="proj-body">First-generation creator discovery tool for sourcing and shortlisting YouTube creators. Established the foundation for later discovery systems.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Gave the sourcing team a repeatable way to search and shortlist YouTube creators.</div>
+        <div class="proj-cta"><a href="https://script.google.com/a/macros/barcodent.com/s/AKfycbxf2AocO-K5PSfMOUIiYY0x_qM57Ivjuf_lTk6M_aY75tNoO8KD9aUdjqXAKUvCnz24/exec" target="_blank" rel="noopener noreferrer">Open Tool →</a></div>
       </div>
       <div class="project-card">
         <span class="proj-badge internal">Creator Intelligence</span>
         <div class="proj-title">Regional Creator Discovery System</div>
         <div class="proj-body">Automated discovery tool for identifying creators across Indian regions and vernacular languages. Made regional sourcing repeatable and scalable.</div>
         <div class="proj-impact"><strong>Impact:</strong> Expanded sourcing coverage to regional markets efficiently.</div>
+        <div class="proj-cta-internal"><span>Internal Barcode Project</span></div>
       </div>
       <div class="project-card">
         <span class="proj-badge internal">Automation</span>
         <div class="proj-title">Creator Sentiment Analysis Tool</div>
         <div class="proj-body">AI-assisted tool for scoring creators based on audience sentiment. Automated what was previously done manually by team members.</div>
         <div class="proj-impact"><strong>Impact:</strong> Reduced evaluation time by 60% while improving consistency.</div>
+        <div class="proj-cta"><a href="https://docs.google.com/spreadsheets/d/1qi8zIr8d-XzEN4XCgB50-H_8DEX_n1r-g0YJFDtnG_c/edit?gid=2038026519#gid=2038026519" target="_blank" rel="noopener noreferrer">View Project →</a></div>
       </div>
       <div class="project-card">
         <span class="proj-badge client">Campaign Intelligence</span>
         <div class="proj-title">Adani Campaign Intelligence Platform</div>
         <div class="proj-body">Backend system for tracking creator campaign deliverables and performance. Handles real campaign data for active client projects.</div>
         <div class="proj-impact"><strong>Impact:</strong> Provides centralized visibility into campaign execution for stakeholders.</div>
+        <div class="proj-cta-internal"><span>Internal Barcode Project</span></div>
       </div>
       <div class="project-card">
         <span class="proj-badge client">Campaign Intelligence</span>
         <div class="proj-title">Punjab Campaign Dashboard</div>
         <div class="proj-body">Automated campaign monitoring and reporting workflow. Reduces manual status update overhead.</div>
         <div class="proj-impact"><strong>Impact:</strong> Streamlined campaign reporting for a major client.</div>
+        <div class="proj-cta"><a href="https://script.google.com/a/macros/barcodent.com/s/AKfycbxUKHwcsFIugUtCQwGlMhtm6zhG7Je2Hc2ApQSxOfRa3DNaMXGdxBIY-wUODziaZcej/exec" target="_blank" rel="noopener noreferrer">Open Dashboard →</a></div>
       </div>
       <div class="project-card">
         <span class="proj-badge internal">Discovery</span>
         <div class="proj-title">Influencer Radar V2</div>
         <div class="proj-body">Multi-platform creator discovery system with YouTube, Instagram, and vernacular creator search. AI-powered recommendations based on campaign briefs.</div>
         <div class="proj-impact"><strong>Impact:</strong> Unified fragmented discovery workflows into a single intelligent tool.</div>
+        <div class="proj-cta"><a href="https://yt-ig-creator-finder-sqtsvhqf5fgwvqrafjpkdl.streamlit.app/" target="_blank" rel="noopener noreferrer">Launch Platform →</a></div>
+      </div>
+      <div class="project-card">
+        <span class="proj-badge client">Social Intelligence</span>
+        <div class="proj-title">Saudi Social Listening Report</div>
+        <div class="proj-body">Structured social intelligence report tracking sentiment, narratives, and brand conversation across the Saudi market.</div>
+        <div class="proj-impact"><strong>Impact:</strong> Gave stakeholders a clear, actionable view of market sentiment and narrative risk.</div>
+        <div class="proj-cta"><a href="https://saudi-report-2le6.vercel.app/" target="_blank" rel="noopener noreferrer">View Report →</a></div>
       </div>
       <div class="project-card">
         <span class="proj-badge internal">Data Infrastructure</span>
         <div class="proj-title">Creator Database Enrichment</div>
         <div class="proj-body">Ongoing project to improve creator database quality through region tagging, deduplication, and metadata standardization.</div>
         <div class="proj-impact"><strong>Impact:</strong> Improving searchability and reliability of creator intelligence data.</div>
+        <div class="proj-cta-internal"><span>Internal Barcode Project</span></div>
       </div>
     </div>
   </div>
@@ -911,8 +977,19 @@ setTimeout(() => {
   });
 }, 400);
 
+/* MOBILE NAV TOGGLE */
+const navToggle = document.getElementById('navToggle');
+const navMobilePanel = document.getElementById('navMobilePanel');
+if (navToggle && navMobilePanel) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMobilePanel.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+}
+
 /* NAV ACTIVE */
-const navLinks = document.querySelectorAll('.nav a');
+const navLinks = document.querySelectorAll('.nav a, .nav-mobile-panel a');
 const sectionIds = ['hero','exec','journey','achievements','projects','skills','roadmap'];
 const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 function updateNav() {
@@ -921,7 +998,15 @@ function updateNav() {
   navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href').replace('#','') === current));
 }
 window.addEventListener('scroll', updateNav, { passive: true });
-navLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior:'smooth', block:'start' }); }));
+navLinks.forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior:'smooth', block:'start' });
+  if (navMobilePanel && navMobilePanel.classList.contains('open')) {
+    navMobilePanel.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+}));
 
 /* CHARTS */
 Chart.defaults.font.family = "'League Spartan', system-ui, sans-serif";
